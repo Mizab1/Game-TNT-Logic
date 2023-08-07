@@ -64,6 +64,10 @@ function tick{
         execute if entity @s[tag=poppy_plushies] run{
             placetnt poppy_plushies 110003
         }
+        #--- poppy_huggy
+        execute if entity @s[tag=poppy_huggy] run{
+            placetnt poppy_huggy 110004
+        }
 
         #--- fortnite_storm
         execute if entity @s[tag=fortnite_storm] run{
@@ -151,12 +155,64 @@ function tick{
 
                 # Runs a particle effect when ignited
                 execute if score @s fuse_time matches 1..80 run block{
-                    particle block red_concrete ~ ~ ~ 1 1 1 1 20
+                    particle block blue_concrete ~ ~ ~ 1 1 1 1 10
+                    particle block light_blue_concrete ~ ~ ~ 1 1 1 1 10
                 }
                 # Kill the AS if TNT is exploded
                 execute if score @s fuse_time matches 1 run{
+                    kill @e[type=tnt, distance=..0.5]
                     summon creeper ~ ~0.8 ~ {Fuse:0, ExplosionRadius: 7b}
+                    <%%
+                        let plushies = {
+                            "villager1": 111003, 
+                            "villager2": 111004, 
+                            "villager3": 111005, 
+                            "bee": 111006,
+                            "snow_golem": 111007
+                        }
+                        function randomNumber(min, max) {
+                            return Math.floor(Math.random() * (max - min) + min);
+                        }
+                        for(let i = 0; i <= 6; i++){
+                            for(let key in plushies){
+                                emit(`summon item_display ~${randomNumber(-7, 7) * 3} ~0.5 ~${randomNumber(-7, 7) * 3} {NoGravity:0b, item_display:"fixed",Rotation:[${randomNumber(-180, 180)}F,0F],item:{id:"minecraft:wooden_hoe",Count:1b,tag:{CustomModelData:${plushies[key]}}}}`)
+                            } 
+                        }
+                    %%>
                     # kill @e[type=armor_stand,tag=tnt.poppy_plushies,distance=..4]
+                    tellraw @a {"text":"PLUSHIES!", "color":"gold"}
+                    kill @s
+                }
+            }
+            execute(unless block ~ ~ ~ tnt unless entity @e[type=tnt,distance=..0.5]){
+                # Breaking
+                kill @s
+            }
+        }
+        #--- poppy_huggy
+        execute if entity @s[tag=tnt.poppy_huggy] run{
+            execute(if entity @e[type=tnt,distance=..0.5]){
+                # Teleport itself to the ignited TNT
+                tp @s @e[type=tnt,distance=..0.5,sort=nearest,limit=1]
+
+                # Use its 'fuse_time' scoreboard to link with 'Fuse' of TNT
+                execute store result score @s fuse_time run data get entity @e[type=tnt,distance=..0.5,limit=1] Fuse
+
+                # Runs a particle effect when ignited
+                execute if score @s fuse_time matches 1..80 run block{
+                    particle block blue_concrete ~ ~ ~ 1 1 1 1 10
+                    particle block light_blue_concrete ~ ~ ~ 1 1 1 1 10
+                }
+                # Kill the AS if TNT is exploded
+                execute if score @s fuse_time matches 1 run{
+                    kill @e[type=tnt, distance=..0.5]
+                    LOOP(2,i){
+                        function models_logic:summon/huggy_wuggy
+                    }
+                    time set mid_night
+                    playsound minecraft:ambient.cave master @a ~ ~ ~ 1 1.5
+                    # kill @e[type=armor_stand,tag=tnt.poppy_huggy,distance=..4]
+                    tellraw @a {"text":"Oh No! Huggy Wuggy!?", "color":"gold"}
                     kill @s
                 }
             }
@@ -208,9 +264,11 @@ function amongus_emergency{
 }
 
 function poppy_plushies{
-    givetnt <Among Us: Emergency Meeting TNT> 110003 poppy_plushies
-    tellraw @s {"text":"Explodes at random timing","color":"green"}
+    givetnt <Ploppy Playtime: Plushes TNT> 110003 poppy_plushies
+    tellraw @s {"text":"Spawn bunch of plushies","color":"green"}
 }
+
+
 function fortnite_storm{
     givetnt <Fortnite: Storm TNT> 110002 fortnite_storm
     tellraw @s {"text":"Summons a storm which damages the player","color":"green"}

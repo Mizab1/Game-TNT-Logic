@@ -1,3 +1,4 @@
 #built using mc-build (https://github.com/mc-build/mc-build)
 
-particle portal ~ ~ ~ 1 1 1 1 20
+particle block blue_concrete ~ ~ ~ 1 1 1 1 10
+particle block light_blue_concrete ~ ~ ~ 1 1 1 1 10
