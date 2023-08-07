@@ -1,0 +1,2 @@
+execute if score @s moving.info matches 1 unless score @s moving.status matches 1 run scoreboard players set @s moving.status 1
+execute if score @s moving.info matches 1 unless score @s moving.status matches 2 run scoreboard players set @s moving.status 2

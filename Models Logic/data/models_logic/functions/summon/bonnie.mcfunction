@@ -1,0 +1,2 @@
+execute rotated ~ 0 run function animated_java:fnaf_bonnie/summon
+execute as @e[type=#animated_java:root,tag=aj.fnaf_bonnie.root] run function animated_java:fnaf_bonnie/animations/animation.bonnie.idle_off/play

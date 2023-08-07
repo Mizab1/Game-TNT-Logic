@@ -1,0 +1,2 @@
+execute rotated ~ 0 run function animated_java:fnaf_freddy/summon
+execute as @e[type=#animated_java:root,tag=aj.fnaf_freddy.root] run function animated_java:fnaf_freddy/animations/animation.freddy_fazbear.idle_off/play
