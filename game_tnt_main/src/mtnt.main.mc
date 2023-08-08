@@ -206,10 +206,26 @@ function tick{
                 # Kill the AS if TNT is exploded
                 execute if score @s fuse_time matches 1 run{
                     kill @e[type=tnt, distance=..0.5]
+                    particle minecraft:explosion ~ ~ ~ 2 2 2 1 100
+                    playsound entity.generic.explode master @a ~ ~ ~
+                    block{
+                        name test
+                    <%%
+                        let blocks = ["blue_terracotta", "light_blue_terracotta", "yellow_terracotta", "orange_terracotta", "red_terracotta", "white_terracotta", "green_terracotta", "lime_terracotta", "purple_terracotta"]
+                        function randomNumber(min, max) {
+                            return (Math.random() * (max - min) + min).toFixed(3);
+                        }
+
+                        for(let i = 0; i <= 40; i++){
+                            let item = blocks[Math.floor(Math.random()*blocks.length)];
+                            emit(`summon falling_block ~ ~2 ~ {BlockState:{Name:"minecraft:${item}"},Time:1,Motion:[${randomNumber(-0.5, 0.5)},${randomNumber(0.5, 1)},${randomNumber(-0.5, 0.5)}]}`)
+                        }
+                    %%>
+                    }
                     LOOP(2,i){
                         function models_logic:summon/huggy_wuggy
                     }
-                    time set mid_night
+                    time set midnight
                     playsound minecraft:ambient.cave master @a ~ ~ ~ 1 1.5
                     # kill @e[type=armor_stand,tag=tnt.poppy_huggy,distance=..4]
                     tellraw @a {"text":"Oh No! Huggy Wuggy!?", "color":"gold"}
@@ -266,6 +282,10 @@ function amongus_emergency{
 function poppy_plushies{
     givetnt <Ploppy Playtime: Plushes TNT> 110003 poppy_plushies
     tellraw @s {"text":"Spawn bunch of plushies","color":"green"}
+}
+function poppy_huggy{
+    givetnt <Ploppy Playtime: Huggy Wuggy TNT> 110004 poppy_huggy
+    tellraw @s {"text":"Spawn Huggy Wuggies","color":"green"}
 }
 
 

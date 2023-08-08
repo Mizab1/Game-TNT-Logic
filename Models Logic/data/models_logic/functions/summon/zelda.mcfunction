@@ -1,0 +1,1 @@
+summon cow ~ ~ ~ {DeathLootTable:"minecraft:bat", Silent:1b,Health:30f,Tags:["new","aj_mob","zelda"],ActiveEffects:[{Id:14,Amplifier:1b,Duration:999999,ShowParticles:0b}],Attributes:[{Name:generic.max_health,Base:30}]}

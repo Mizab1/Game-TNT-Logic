@@ -1,6 +1,8 @@
 {
     "values": [
       "minecraft:cow",
-      "minecraft:husk"
+      "minecraft:husk",
+      "minecraft:creeper",
+      "minecraft:iron_golem"
     ]
   }
