@@ -1,6 +1,7 @@
 #> Model
 execute unless entity @e[type=item_display, distance=..1,tag=aj.pikachu.root,limit=1,sort=nearest] run function animated_java:pikachu/summon
 execute as @e[type=item_display, distance=..1,tag=aj.pikachu.root,limit=1,sort=nearest] run tp @s ~ ~ ~ ~ 0
+kill @e[type=pig, tag=aj.pikachu.locator.pokedex]
 
 #> Walk
 function models_logic:check_walk

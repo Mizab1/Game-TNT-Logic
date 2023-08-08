@@ -1,1 +1,1 @@
-summon iron_golem ~ ~ ~ {DeathLootTable:"minecraft:bat", Silent:1b,Health:30f,Tags:["new","aj_mob","pikachu"],ActiveEffects:[{Id:14,Amplifier:1b,Duration:999999,ShowParticles:0b}, {Id:12,Amplifier:100b,Duration:999999,ShowParticles:0b}],Attributes:[{Name:generic.max_health,Base:30}]}
+summon iron_golem ~ ~ ~ {DeathLootTable:"minecraft:bat", Silent:1b,Health:50f,Tags:["new","aj_mob","pikachu"],ActiveEffects:[{Id:14,Amplifier:1b,Duration:999999,ShowParticles:0b}, {Id:12,Amplifier:100b,Duration:999999,ShowParticles:0b}],Attributes:[{Name:generic.max_health,Base:50}]}
