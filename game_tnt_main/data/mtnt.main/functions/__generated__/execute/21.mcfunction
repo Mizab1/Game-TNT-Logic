@@ -1,6 +1,5 @@
 #built using mc-build (https://github.com/mc-build/mc-build)
 
-execute positioned ~2 ~ ~3 run function models_logic:summon/aqua
-execute positioned ~-2 ~ ~-4 run function models_logic:summon/purple
-execute positioned ~ ~ ~3 run function models_logic:summon/yellow
-spreadplayers ~ ~ 3 6 true @a
+summon armor_stand ~ ~ ~ {NoGravity:1b,Invisible:1b,Tags:["tnt.minecraft_endermen","tnt.as"],ArmorItems:[{},{},{},{id:"minecraft:endermite_spawn_egg",Count:1b,tag:{CustomModelData:110012}}]}
+setblock ~ ~ ~ tnt
+tp @s ~ ~-600 ~

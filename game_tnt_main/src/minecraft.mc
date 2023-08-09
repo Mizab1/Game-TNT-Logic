@@ -21,7 +21,7 @@ advancement punched{
   }
 }
 
-loot_table betty_loot{
+loot_table loot_llama{
   "type": "minecraft:generic",
   "pools": [
     {
@@ -32,12 +32,12 @@ loot_table betty_loot{
           "children": [
             {
               "type": "minecraft:item",
-              "quality": 3,
+              "weight": 1,
               "name": "minecraft:iron_ingot"
             },
             {
               "type": "minecraft:item",
-              "quality": 2,
+              "weight": 1,
               "name": "minecraft:gold_ingot"
             },
             {
@@ -54,16 +54,17 @@ loot_table betty_loot{
             },
             {
               "type": "minecraft:item",
-              "weight": 4,
-              "name": "minecraft:cookie"
+              "weight": 2,
+              "name": "minecraft:bricks"
+            },
+            {
+              "type": "minecraft:item",
+              "weight": 2,
+              "name": "minecraft:oak_planks"
             },
             {
               "type": "minecraft:item",
               "name": "minecraft:netherite_scrap"
-            },
-            {
-              "type": "minecraft:item",
-              "name": "minecraft:quartz"
             }
           ]
         }

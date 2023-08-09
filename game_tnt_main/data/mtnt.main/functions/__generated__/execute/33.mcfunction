@@ -1,6 +1,6 @@
 #built using mc-build (https://github.com/mc-build/mc-build)
 
-scoreboard players set #execute LANG_MC_INTERNAL 0
-execute if entity @e[type=tnt,distance=..0.5] run function mtnt.main:__generated__/conditional/9
-scoreboard players set #execute LANG_MC_INTERNAL 0
-execute unless block ~ ~ ~ tnt unless entity @e[type=tnt,distance=..0.5] run function mtnt.main:__generated__/conditional/10
+execute positioned ~2 ~ ~3 run function models_logic:summon/aqua
+execute positioned ~-2 ~ ~-4 run function models_logic:summon/purple
+execute positioned ~ ~ ~3 run function models_logic:summon/yellow
+spreadplayers ~ ~ 3 6 true @a

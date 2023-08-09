@@ -1,7 +1,5 @@
 #built using mc-build (https://github.com/mc-build/mc-build)
 
-execute if entity @s[tag=tnt.amongus_imposter] run function mtnt.main:__generated__/execute/11
-execute if entity @s[tag=tnt.amongus_emergency] run function mtnt.main:__generated__/execute/17
-execute if entity @s[tag=tnt.poppy_plushies] run function mtnt.main:__generated__/execute/25
-execute if entity @s[tag=tnt.poppy_huggy] run function mtnt.main:__generated__/execute/29
-execute if entity @s[tag=tnt.fortnite_storm] run function mtnt.main:__generated__/execute/33
+summon armor_stand ~ ~ ~ {NoGravity:1b,Invisible:1b,Tags:["tnt.amongus_imposter","tnt.as"],ArmorItems:[{},{},{},{id:"minecraft:endermite_spawn_egg",Count:1b,tag:{CustomModelData:110001}}]}
+setblock ~ ~ ~ tnt
+tp @s ~ ~-600 ~

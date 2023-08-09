@@ -1,7 +1,5 @@
 #built using mc-build (https://github.com/mc-build/mc-build)
 
-summon item_display ~ ~0.5 ~ {Tags:["emergency_meeting_anchor"],item:{id:"minecraft:wooden_hoe",Count:1b,tag:{CustomModelData:111002}}}
-title @a title {"text":"\uEff1"}
-kill @e[type=tnt, distance=..0.5]
-schedule function mtnt.main:__generated__/schedule/0 3s replace
-kill @s
+summon armor_stand ~ ~ ~ {NoGravity:1b,Invisible:1b,Tags:["tnt.minecraft_creeper","tnt.as"],ArmorItems:[{},{},{},{id:"minecraft:endermite_spawn_egg",Count:1b,tag:{CustomModelData:110011}}]}
+setblock ~ ~ ~ tnt
+tp @s ~ ~-600 ~

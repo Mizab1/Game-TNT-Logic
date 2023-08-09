@@ -1,7 +1,8 @@
 #built using mc-build (https://github.com/mc-build/mc-build)
 
-execute if entity @s[tag=amongus_imposter] run function mtnt.main:__generated__/execute/5
-execute if entity @s[tag=amongus_emergency] run function mtnt.main:__generated__/execute/6
-execute if entity @s[tag=poppy_plushies] run function mtnt.main:__generated__/execute/7
-execute if entity @s[tag=poppy_huggy] run function mtnt.main:__generated__/execute/8
-execute if entity @s[tag=fortnite_storm] run function mtnt.main:__generated__/execute/9
+playsound minecraft:block.big_dripleaf.tilt_down master @s
+effect give @s minecraft:darkness 3 10 true
+particle cloud ~ ~ ~ 2 2 2 1 20 normal
+particle minecraft:white_ash ~ ~1 ~ 3 3 3 1 5000
+particle minecraft:crimson_spore ~ ~1 ~ 3 3 3 1 5000
+effect give @s minecraft:slowness 3 3 true

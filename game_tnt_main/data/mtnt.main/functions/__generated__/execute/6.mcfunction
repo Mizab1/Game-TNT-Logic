@@ -1,5 +1,4 @@
 #built using mc-build (https://github.com/mc-build/mc-build)
 
-summon armor_stand ~ ~ ~ {NoGravity:1b,Invisible:1b,Tags:["tnt.amongus_emergency","tnt.as"],ArmorItems:[{},{},{},{id:"minecraft:endermite_spawn_egg",Count:1b,tag:{CustomModelData:110002}}]}
-setblock ~ ~ ~ tnt
-tp @s ~ ~-600 ~
+execute store result score @s hurt_time_llama run data get entity @s HurtTime
+execute if score @s hurt_time_llama matches 10 run loot spawn ~ ~ ~ loot minecraft:loot_llama
