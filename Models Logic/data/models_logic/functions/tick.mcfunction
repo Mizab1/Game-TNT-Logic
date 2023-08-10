@@ -12,7 +12,7 @@ execute as @e[type=#models_logic:aj_mobs,tag=pikachu,tag=aj_mob] at @s run funct
 
 execute as @e[type=#models_logic:aj_mobs, tag=new,tag=aj_mob] at @s run function models_logic:new
 
-# execute as @e[type=pig, tag=aj.huggy_wuggy.locator.attack_smear] run kill
+execute as @e[type=pig, tag=aj.huggy_wuggy.locator.attack_smear] run effect give @s invisibility infinite 1 true
 
 execute as @e[type=item_display, tag=aj.crewmate_aqua.root] at @s unless entity @e[type=#models_logic:aj_mobs,tag=aqua,tag=aj_mob,distance=..1] run function animated_java:crewmate_aqua/zzzzzzzz/remove/as_root
 execute as @e[type=item_display, tag=aj.crewmate_purple.root] at @s unless entity @e[type=#models_logic:aj_mobs,tag=purple,tag=aj_mob,distance=..1] run function animated_java:crewmate_purple/zzzzzzzz/remove/as_root

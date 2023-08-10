@@ -5,4 +5,4 @@ execute as @a[tag=in_sandstorm] at @s run function mtnt.main:__generated__/execu
 execute as @e[type=block_display, tag=darkness_radius] at @s if entity @a[distance=..5] run function mtnt.main:__generated__/execute/5
 execute as @e[type=llama, tag=loot_llama] at @s run function mtnt.main:__generated__/execute/6
 execute as @e[type=endermite, tag=tnt.endermite] at @s run function mtnt.main:__generated__/execute/9
-execute as @e[type=armor_stand, tag=tnt.as] at @s run function mtnt.main:__generated__/execute/22
+execute as @e[type=armor_stand, tag=tnt.as] at @s run function mtnt.main:__generated__/execute/27

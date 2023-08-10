@@ -86,6 +86,10 @@ function tick{
         execute if entity @s[tag=poppy_huggy] run{
             placetnt poppy_huggy 110004
         }
+        #--- poppy_mommy
+        execute if entity @s[tag=poppy_mommy] run{
+            placetnt poppy_mommy 110015
+        }
 
         #--- fnaf_animatronics
         execute if entity @s[tag=fnaf_animatronics] run{
@@ -121,6 +125,24 @@ function tick{
         #--- minecraft_endermen
         execute if entity @s[tag=minecraft_endermen] run{
             placetnt minecraft_endermen 110012
+        }
+
+        #--- mario_mystery
+        execute if entity @s[tag=mario_mystery] run{
+            placetnt mario_mystery 110013
+        }
+        #--- mario_bowser
+        execute if entity @s[tag=mario_bowser] run{
+            placetnt mario_bowser 110014
+        }
+
+        #--- backrooms_maze
+        execute if entity @s[tag=backrooms_maze] run{
+            placetnt backrooms_maze 110016
+        }
+        #--- backrooms_entity
+        execute if entity @s[tag=backrooms_entity] run{
+            placetnt backrooms_entity 110017
         }
 
     }
@@ -296,6 +318,77 @@ function tick{
                     playsound minecraft:ambient.cave master @a ~ ~ ~ 1 1.5
                     # kill @e[type=armor_stand,tag=tnt.poppy_huggy,distance=..4]
                     tellraw @a {"text":"Oh No! Huggy Wuggy!?", "color":"gold"}
+                    kill @s
+                }
+            }
+            execute(unless block ~ ~ ~ tnt unless entity @e[type=tnt,distance=..0.5]){
+                # Breaking
+                kill @s
+            }
+        }
+        #--- poppy_mommy
+        execute if entity @s[tag=tnt.poppy_mommy] run{
+            execute(if entity @e[type=tnt,distance=..0.5]){
+                # Teleport itself to the ignited TNT
+                tp @s @e[type=tnt,distance=..0.5,sort=nearest,limit=1]
+
+                # Use its 'fuse_time' scoreboard to link with 'Fuse' of TNT
+                execute store result score @s fuse_time run data get entity @e[type=tnt,distance=..0.5,limit=1] Fuse
+
+                # Runs a particle effect when ignited
+                execute if score @s fuse_time matches 1..80 run block{
+                    particle block blue_concrete ~ ~ ~ 1 1 1 1 10
+                    particle block light_blue_concrete ~ ~ ~ 1 1 1 1 10
+                }
+                # Kill the AS if TNT is exploded
+                execute if score @s fuse_time matches 1 run{
+                    kill @e[type=tnt, distance=..0.5]
+                    particle minecraft:explosion ~ ~ ~ 2 2 2 1 100
+                    playsound entity.generic.explode master @a ~ ~ ~
+                    
+
+                    block{
+                        name huggy_wuggy_circle
+                        kill @e[type=husk, tag=huggy_wuggy]
+                        
+                        execute as @a[limit=1, sort=nearest] at @s run{
+                            tag @s add revolve
+                            execute positioned ~ ~ ~5 run function models_logic:summon/huggy_wuggy
+                            tag @e[type=husk, tag=huggy_wuggy, limit=1, tag=!huggy_1, tag=!huggy_2, tag=!huggy_3, distance=..15] add huggy_1
+
+                            execute positioned ~4.35 ~ ~-2.5 run function models_logic:summon/huggy_wuggy
+                            tag @e[type=husk, tag=huggy_wuggy, limit=1, tag=!huggy_1, tag=!huggy_2, tag=!huggy_3, distance=..15] add huggy_2
+
+                            execute positioned ~-4.35 ~ ~-2.5 run function models_logic:summon/huggy_wuggy
+                            tag @e[type=husk, tag=huggy_wuggy, limit=1, tag=!huggy_1, tag=!huggy_2, tag=!huggy_3, distance=..15] add huggy_3
+                        }
+                        
+                        sequence{
+                            LOOP(200,i){
+                                delay 2t
+                                <%%
+                                    function degreesToRadians(degrees) {
+                                        return degrees * (Math.PI / 180);
+                                    }
+
+                                    emit(`execute at @e[type=husk, tag=huggy_wuggy] run particle dust 0 0 1 2 ~ ~ ~ 0.5 0.5 0.5 1 30`)
+                                    emit(`execute as @a[tag=revolve] run effect give @s slowness 1 10 true`)
+                                    emit(`execute at @a[tag=revolve] run tp @e[type=husk, tag=huggy_1, limit=1, distance=..15] ~${Math.sin(degreesToRadians(i * 5)).toFixed(2) * 5} ~ ~${Math.cos(degreesToRadians(i * 5)).toFixed(2) * 5} facing entity @a[limit=1]`)
+                                    // emit(`execute at @a run particle dust 1 0 0 2 ~${Math.sin(degreesToRadians((i * 5) + 120)).toFixed(2) * 5} ~ ~${Math.cos(degreesToRadians((i * 5) + 120)).toFixed(2) * 5} 0 0 0 1 1`)
+                                    emit(`execute at @a[tag=revolve] run tp @e[type=husk, tag=huggy_2, limit=1, distance=..15] ~${Math.sin(degreesToRadians((i * 5) + 120)).toFixed(2) * 5} ~ ~${Math.cos(degreesToRadians((i * 5) + 120)).toFixed(2) * 5} facing entity @a[limit=1]`)
+                                    // emit(`execute at @a run particle dust 1 0 0 2 ~${Math.sin(degreesToRadians((i * 5) + 240)).toFixed(2) * 5} ~ ~${Math.cos(degreesToRadians((i * 5) + 240)).toFixed(2) * 5} 0 0 0 1 1`)
+                                    emit(`execute at @a[tag=revolve] run tp @e[type=husk, tag=huggy_3, limit=1, distance=..15] ~${Math.sin(degreesToRadians((i * 5) + 240)).toFixed(2) * 5} ~ ~${Math.cos(degreesToRadians((i * 5) + 240)).toFixed(2) * 5} facing entity @a[limit=1]`)
+
+                                    if (i % 20 == 0){
+                                        emit(`execute at @a[tag=revolve] run playsound minecraft:sfx.mommy master @a`)
+                                    }
+                                %%>
+
+                            }
+                        }
+                    }
+                    playsound minecraft:ambient.cave master @a ~ ~ ~ 1 1.5
+                    # kill @e[type=armor_stand,tag=tnt.poppy_mommy,distance=..4]
                     kill @s
                 }
             }
@@ -686,6 +779,150 @@ function tick{
             }
         }
 
+        #--- mario_mystery
+        execute if entity @s[tag=tnt.mario_mystery] run{
+            execute(if entity @e[type=tnt,distance=..0.5]){
+                # Teleport itself to the ignited TNT
+                tp @s @e[type=tnt,distance=..0.5,sort=nearest,limit=1]
+
+                # Use its 'fuse_time' scoreboard to link with 'Fuse' of TNT
+                execute store result score @s fuse_time run data get entity @e[type=tnt,distance=..0.5,limit=1] Fuse
+
+                # Runs a particle effect when ignited
+                execute if score @s fuse_time matches 1..80 run block{
+                    particle minecraft:wax_on ~ ~ ~ 1 1 1 1 20
+                }
+                # Kill the AS if TNT is exploded
+                execute if score @s fuse_time matches 1 run{
+                    kill @e[type=tnt, distance=..0.5]
+                    particle minecraft:explosion ~ ~ ~ 2 2 2 1 100
+                    playsound entity.generic.explode master @a ~ ~ ~
+
+                    loot spawn ~ ~1 ~ loot minecraft:mystery_tnt
+                    particle minecraft:totem_of_undying ~ ~1 ~ 0.5 0.5 0.5 0.1 50
+                    playsound minecraft:item.goat_horn.sound.1 master @a ~ ~ ~ 1 2
+                    
+                    # kill @e[type=armor_stand,tag=tnt.mario_mystery,distance=..4]
+                    kill @s
+                }
+            }
+            execute(unless block ~ ~ ~ tnt unless entity @e[type=tnt,distance=..0.5]){
+                # Breaking
+                kill @s
+            }
+        }
+        #--- mario_bowser
+        execute if entity @s[tag=tnt.mario_bowser] run{
+            execute(if entity @e[type=tnt,distance=..0.5]){
+                # Teleport itself to the ignited TNT
+                tp @s @e[type=tnt,distance=..0.5,sort=nearest,limit=1]
+
+                # Use its 'fuse_time' scoreboard to link with 'Fuse' of TNT
+                execute store result score @s fuse_time run data get entity @e[type=tnt,distance=..0.5,limit=1] Fuse
+
+                # Runs a particle effect when ignited
+                execute if score @s fuse_time matches 1..80 run block{
+                    particle minecraft:wax_on ~ ~ ~ 1 1 1 1 20
+                }
+                # Kill the AS if TNT is exploded
+                execute if score @s fuse_time matches 1 run{
+                    kill @e[type=tnt, distance=..0.5]
+                    particle minecraft:explosion ~ ~ ~ 2 2 2 1 100
+                    playsound entity.generic.explode master @a ~ ~ ~
+
+                    execute positioned ~ ~1 ~ run function models_logic:summon/bowser
+                    playsound minecraft:entity.ender_dragon.growl master @a ~ ~ ~ 1 0.7
+                    particle poof ~ ~ ~ 2 2 2 0.5 1000
+
+                    tellraw @a {"text":"Bowser is spawned!", "color":"red"}
+
+                    playsound minecraft:entity.enderman.scream master @a ~ ~ ~ 1 0.8
+                    
+                    
+                    # kill @e[type=armor_stand,tag=tnt.mario_bowser,distance=..4]
+                    kill @s
+                }
+            }
+            execute(unless block ~ ~ ~ tnt unless entity @e[type=tnt,distance=..0.5]){
+                # Breaking
+                kill @s
+            }
+        }
+        
+        #--- backrooms_maze
+        execute if entity @s[tag=tnt.backrooms_maze] run{
+            execute(if entity @e[type=tnt,distance=..0.5]){
+                # Teleport itself to the ignited TNT
+                tp @s @e[type=tnt,distance=..0.5,sort=nearest,limit=1]
+
+                # Use its 'fuse_time' scoreboard to link with 'Fuse' of TNT
+                execute store result score @s fuse_time run data get entity @e[type=tnt,distance=..0.5,limit=1] Fuse
+
+                # Runs a particle effect when ignited
+                execute if score @s fuse_time matches 1..80 run block{
+                    particle block smooth_sandstone ~ ~ ~ 1 1 1 1 20
+                }
+                # Kill the AS if TNT is exploded
+                execute if score @s fuse_time matches 1 run{
+                    kill @e[type=tnt, distance=..0.5]
+                    particle minecraft:explosion ~ ~ ~ 2 2 2 1 100
+                    playsound entity.generic.explode master @a ~ ~ ~
+
+                    setblock ~ ~-1 ~ structure_block[mode=load]{name:"minecraft:backrooms",posX:-2,posY:-48,posZ:-2,rotation:"NONE",mirror:"NONE",mode:"LOAD"} replace
+                    setblock ~ ~-2 ~ redstone_block
+                    tp @a ~ ~-48 ~
+                    setblock ~ ~-1 ~ air replace
+                    
+                    execute at @a run playsound minecraft:ambient.cave master @a ~ ~ ~ 1 1.5
+                    schedule 2s replace{
+                        execute at @a run playsound minecraft:entity.ender_dragon.growl master @a ~ ~ ~ 1 0.1
+                    }
+                    # kill @e[type=armor_stand,tag=tnt.backrooms_maze,distance=..4]
+                    kill @s
+                }
+            }
+            execute(unless block ~ ~ ~ tnt unless entity @e[type=tnt,distance=..0.5]){
+                # Breaking
+                kill @s
+            }
+        }
+        #--- backrooms_entity
+        execute if entity @s[tag=tnt.backrooms_entity] run{
+            execute(if entity @e[type=tnt,distance=..0.5]){
+                # Teleport itself to the ignited TNT
+                tp @s @e[type=tnt,distance=..0.5,sort=nearest,limit=1]
+
+                # Use its 'fuse_time' scoreboard to link with 'Fuse' of TNT
+                execute store result score @s fuse_time run data get entity @e[type=tnt,distance=..0.5,limit=1] Fuse
+
+                # Runs a particle effect when ignited
+                execute if score @s fuse_time matches 1..80 run block{
+                    particle block black_concrete ~ ~ ~ 1 1 1 1 20
+                }
+                # Kill the AS if TNT is exploded
+                execute if score @s fuse_time matches 1 run{
+                    kill @e[type=tnt, distance=..0.5]
+                    particle minecraft:explosion ~ ~ ~ 2 2 2 1 100
+                    playsound entity.generic.explode master @a ~ ~ ~
+
+                    function models_logic:summon/backdoor
+                    particle poof ~ ~1 ~ 2 2 2 0.5 1000
+
+                    tellraw @a {"text":"What's that Mob?!", "color":"red"}
+
+                    playsound minecraft:entity.enderman.scream master @a ~ ~ ~ 1 0.1
+                    
+                    
+                    # kill @e[type=armor_stand,tag=tnt.backrooms_entity,distance=..4]
+                    kill @s
+                }
+            }
+            execute(unless block ~ ~ ~ tnt unless entity @e[type=tnt,distance=..0.5]){
+                # Breaking
+                kill @s
+            }
+        }
+
     }
 }
 
@@ -707,6 +944,10 @@ function poppy_plushies{
 function poppy_huggy{
     givetnt <Ploppy Playtime: Huggy Wuggy TNT> 110004 poppy_huggy
     tellraw @s {"text":"Spawn Huggy Wuggies","color":"green"}
+}
+function poppy_mommy{
+    givetnt <Ploppy Playtime: Mummy TNT> 110004 poppy_mommy
+    tellraw @s {"text":"Spawn Mummy around the player","color":"green"}
 }
 
 function fnaf_animatronics{
@@ -743,6 +984,24 @@ function minecraft_creeper{
 function minecraft_endermen{
     givetnt <Minecraft : Enderman TNT> 110012 minecraft_endermen
     tellraw @s {"text":"Teleports the player randomly","color":"green"}
+}
+
+function mario_mystery{
+    givetnt <Mario : Mystery TNT> 110013 mario_mystery
+    tellraw @s {"text":"Give random items or powerups","color":"green"}
+}
+function mario_bowser{
+    givetnt <Mario : Bowser TNT> 110014 mario_bowser
+    tellraw @s {"text":"Spawns bowser","color":"green"}
+}
+
+function backrooms_maze{
+    givetnt <Backrooms : Level 0 TNT> 110016 backrooms_maze
+    tellraw @s {"text":"Builds a level 0 maze","color":"green"}
+}
+function backrooms_entity{
+    givetnt <Backrooms : Unknown Entity TNT> 110017 backrooms_entity
+    tellraw @s {"text":"Spawns a unknown but very powerful mob","color":"green"}
 }
 
 

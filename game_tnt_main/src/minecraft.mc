@@ -82,6 +82,148 @@ loot_table loot_llama{
   ]
 }
 
+loot_table mystery_tnt{
+  "type": "minecraft:generic",
+  "pools": [
+    {
+      "rolls": 5,
+      "bonus_rolls": 0,
+      "entries": [
+        {
+          "type": "minecraft:sequence",
+          "children": [
+            {
+              "type": "minecraft:item",
+              "name": "minecraft:enchanted_golden_apple",
+              "functions": [
+                {
+                  "function": "minecraft:set_count",
+                  "count": {
+                    "min": 1,
+                    "max": 3
+                  }
+                }
+              ]
+            },
+            {
+              "type": "minecraft:item",
+              "name": "minecraft:potion",
+              "functions": [
+                {
+                  "function": "minecraft:set_potion",
+                  "id": "minecraft:long_swiftness"
+                }
+              ]
+            },
+            {
+              "type": "minecraft:item",
+              "name": "minecraft:potion",
+              "functions": [
+                {
+                  "function": "minecraft:set_potion",
+                  "id": "minecraft:strong_leaping"
+                }
+              ]
+            },
+            {
+              "type": "minecraft:item",
+              "name": "minecraft:potion",
+              "functions": [
+                {
+                  "function": "minecraft:set_potion",
+                  "id": "minecraft:long_regeneration"
+                }
+              ]
+            },
+            {
+              "type": "minecraft:item",
+              "name": "minecraft:potion",
+              "functions": [
+                {
+                  "function": "minecraft:set_potion",
+                  "id": "minecraft:healing"
+                }
+              ]
+            },
+            {
+              "type": "minecraft:item",
+              "name": "minecraft:potion",
+              "functions": [
+                {
+                  "function": "minecraft:set_potion",
+                  "id": "minecraft:invisibility"
+                }
+              ]
+            },
+            {
+              "type": "minecraft:item",
+              "name": "minecraft:netherite_sword",
+              "functions": [
+                {
+                  "function": "minecraft:set_count",
+                  "count": {
+                    "min": 0,
+                    "max": 1
+                  }
+                }
+              ]
+            },
+            {
+              "type": "minecraft:item",
+              "name": "minecraft:diamond_block",
+              "functions": [
+                {
+                  "function": "minecraft:set_count",
+                  "count": {
+                    "min": 1,
+                    "max": 2
+                  }
+                }
+              ]
+            },
+            {
+              "type": "minecraft:item",
+              "name": "minecraft:netherite_block",
+              "functions": [
+                {
+                  "function": "minecraft:set_count",
+                  "count": 1
+                }
+              ]
+            },
+            {
+              "type": "minecraft:item",
+              "name": "minecraft:iron_block",
+              "functions": [
+                {
+                  "function": "minecraft:set_count",
+                  "count": {
+                    "min": 1,
+                    "max": 3
+                  }
+                }
+              ]
+            },
+            {
+              "type": "minecraft:item",
+              "name": "minecraft:gold_block",
+              "functions": [
+                {
+                  "function": "minecraft:set_count",
+                  "count": {
+                    "min": 1,
+                    "max": 3
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+
 entities all_living{
   
   glow_squid

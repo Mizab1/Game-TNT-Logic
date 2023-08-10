@@ -1,17 +1,19 @@
 #built using mc-build (https://github.com/mc-build/mc-build)
 
-scoreboard players operation temp0 rng = state rng
-scoreboard players operation temp0 rng *= a rng
-scoreboard players operation temp0 rng += c rng
-scoreboard players operation temp0 rng %= m rng
-scoreboard players operation state rng = temp0 rng
-scoreboard players operation modified_fuse rng_score = temp0 rng
-scoreboard players operation modified_fuse rng_score /= #100000 rng
-scoreboard players set min rng 10
-scoreboard players set max rng 31
-scoreboard players operation size rng = max rng
-scoreboard players operation size rng -= min rng
-scoreboard players operation modified_fuse rng_score %= size rng
-scoreboard players operation modified_fuse rng_score += min rng
-execute store result entity @e[type=tnt,distance=..0.5,limit=1] Fuse byte 1 run scoreboard players get modified_fuse rng_score
-kill @s
+execute if entity @s[tag=tnt.amongus_imposter] run function mtnt.main:__generated__/execute/28
+execute if entity @s[tag=tnt.amongus_emergency] run function mtnt.main:__generated__/execute/34
+execute if entity @s[tag=tnt.poppy_plushies] run function mtnt.main:__generated__/execute/42
+execute if entity @s[tag=tnt.poppy_huggy] run function mtnt.main:__generated__/execute/46
+execute if entity @s[tag=tnt.poppy_mommy] run function mtnt.main:__generated__/execute/50
+execute if entity @s[tag=tnt.fnaf_animatronics] run function mtnt.main:__generated__/execute/58
+execute if entity @s[tag=tnt.fnaf_darkness] run function mtnt.main:__generated__/execute/64
+execute if entity @s[tag=tnt.fortnite_storm] run function mtnt.main:__generated__/execute/71
+execute if entity @s[tag=tnt.fortnite_llama] run function mtnt.main:__generated__/execute/75
+execute if entity @s[tag=tnt.roblox_animal] run function mtnt.main:__generated__/execute/79
+execute if entity @s[tag=tnt.roblox_noob] run function mtnt.main:__generated__/execute/83
+execute if entity @s[tag=tnt.minecraft_creeper] run function mtnt.main:__generated__/execute/87
+execute if entity @s[tag=tnt.minecraft_endermen] run function mtnt.main:__generated__/execute/91
+execute if entity @s[tag=tnt.mario_mystery] run function mtnt.main:__generated__/execute/107
+execute if entity @s[tag=tnt.mario_bowser] run function mtnt.main:__generated__/execute/111
+execute if entity @s[tag=tnt.backrooms_maze] run function mtnt.main:__generated__/execute/116
+execute if entity @s[tag=tnt.backrooms_entity] run function mtnt.main:__generated__/execute/122
