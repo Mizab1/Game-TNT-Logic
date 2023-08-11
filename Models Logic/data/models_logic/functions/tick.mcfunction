@@ -8,6 +8,8 @@ execute as @e[type=#models_logic:aj_mobs,tag=bowser,tag=aj_mob] at @s run functi
 execute as @e[type=#models_logic:aj_mobs,tag=zelda,tag=aj_mob] at @s run function models_logic:ai/zelda
 execute as @e[type=#models_logic:aj_mobs,tag=backdoor,tag=aj_mob] at @s run function models_logic:ai/backdoor
 execute as @e[type=#models_logic:aj_mobs,tag=pikachu,tag=aj_mob] at @s run function models_logic:ai/pikachu
+execute as @e[type=#models_logic:aj_mobs,tag=rainbow_red,tag=aj_mob] at @s run function models_logic:ai/rainbow_red
+execute as @e[type=#models_logic:aj_mobs,tag=rainbow_cyan,tag=aj_mob] at @s run function models_logic:ai/rainbow_cyan
 
 
 execute as @e[type=#models_logic:aj_mobs, tag=new,tag=aj_mob] at @s run function models_logic:new
@@ -24,3 +26,5 @@ execute as @e[type=item_display, tag=aj.bowser.root] at @s unless entity @e[type
 execute as @e[type=item_display, tag=aj.zelda.root] at @s unless entity @e[type=#models_logic:aj_mobs,tag=zelda,tag=aj_mob,distance=..1] run function animated_java:zelda/zzzzzzzz/remove/as_root
 execute as @e[type=item_display, tag=aj.backdoor.root] at @s unless entity @e[type=#models_logic:aj_mobs,tag=backdoor,tag=aj_mob,distance=..1] run function animated_java:backdoor/zzzzzzzz/remove/as_root
 execute as @e[type=item_display, tag=aj.pikachu.root] at @s unless entity @e[type=#models_logic:aj_mobs,tag=pikachu,tag=aj_mob,distance=..1] run function animated_java:pikachu/zzzzzzzz/remove/as_root
+execute as @e[type=item_display, tag=aj.rainbow_red.root] at @s unless entity @e[type=#models_logic:aj_mobs,tag=rainbow_red,tag=aj_mob,distance=..1] run function animated_java:rainbow_red/zzzzzzzz/remove/as_root
+execute as @e[type=item_display, tag=aj.rainbow_cyan.root] at @s unless entity @e[type=#models_logic:aj_mobs,tag=rainbow_cyan,tag=aj_mob,distance=..1] run function animated_java:rainbow_cyan/zzzzzzzz/remove/as_root

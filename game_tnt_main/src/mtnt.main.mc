@@ -66,6 +66,15 @@ function tick{
         }
     }
 
+    #pokeball
+    execute as @e[type=snowball] at @s if data entity @s Item.tag.pokeball if entity @e[type=#minecraft:passive, distance=..3] run{
+        effect give @e[type=#minecraft:passive, distance=..3] invisibility 5 0 true
+        particle poof ~ ~ ~ 1 1 1 0.5 1000
+        playsound minecraft:block.lava.extinguish master @a ~ ~ ~ 1 1.8
+        summon item ~ ~ ~ {Item:{id:"minecraft:heart_of_the_sea",Count:1b,tag:{display:{Name:'{"text":"Catched Pokemon","color":"gold","italic":false}'},Enchantments:[{}]}}}
+        kill @s
+    }
+
     # setblock the custom TNT
     execute as @e[type=endermite, tag=tnt.endermite] at @s run{
         #*------ TODO: Change Custom model data
@@ -143,6 +152,24 @@ function tick{
         #--- backrooms_entity
         execute if entity @s[tag=backrooms_entity] run{
             placetnt backrooms_entity 110017
+        }
+
+        #--- pokemon_pikachu
+        execute if entity @s[tag=pokemon_pikachu] run{
+            placetnt pokemon_pikachu 110018
+        }
+        #--- pokemon_pokeball
+        execute if entity @s[tag=pokemon_pokeball] run{
+            placetnt pokemon_pokeball 110019
+        }
+
+        #--- rainbow_red
+        execute if entity @s[tag=rainbow_red] run{
+            placetnt rainbow_red 110020
+        }
+        #--- rainbow_cyan
+        execute if entity @s[tag=rainbow_cyan] run{
+            placetnt rainbow_cyan 110021
         }
 
     }
@@ -381,6 +408,9 @@ function tick{
 
                                     if (i % 20 == 0){
                                         emit(`execute at @a[tag=revolve] run playsound minecraft:sfx.mommy master @a`)
+                                    }
+                                    if (i == 199){
+                                        emit(`tag @a remove revolve`)
                                     }
                                 %%>
 
@@ -873,7 +903,11 @@ function tick{
                     tp @a ~ ~-48 ~
                     setblock ~ ~-1 ~ air replace
                     
-                    execute at @a run playsound minecraft:ambient.cave master @a ~ ~ ~ 1 1.5
+                    execute as @a at @s run{
+                        playsound minecraft:ambient.cave master @s ~ ~ ~ 1 1.5
+                        particle poof ~ ~1 ~ 2 2 2 0.5 1000
+                        effect give @s nausea 8 100 true
+                    }
                     schedule 2s replace{
                         execute at @a run playsound minecraft:entity.ender_dragon.growl master @a ~ ~ ~ 1 0.1
                     }
@@ -923,6 +957,146 @@ function tick{
             }
         }
 
+        #--- pokemon_pikachu
+        execute if entity @s[tag=tnt.pokemon_pikachu] run{
+            execute(if entity @e[type=tnt,distance=..0.5]){
+                # Teleport itself to the ignited TNT
+                tp @s @e[type=tnt,distance=..0.5,sort=nearest,limit=1]
+
+                # Use its 'fuse_time' scoreboard to link with 'Fuse' of TNT
+                execute store result score @s fuse_time run data get entity @e[type=tnt,distance=..0.5,limit=1] Fuse
+
+                # Runs a particle effect when ignited
+                execute if score @s fuse_time matches 1..80 run block{
+                    particle block yellow_concrete ~ ~ ~ 1 1 1 1 20
+                }
+                # Kill the AS if TNT is exploded
+                execute if score @s fuse_time matches 1 run{
+                    kill @e[type=tnt, distance=..0.5]
+                    particle minecraft:explosion ~ ~ ~ 2 2 2 1 100
+                    playsound entity.generic.explode master @a ~ ~ ~
+
+                    <%%
+                        function randomNumber(min, max) {
+                            return (Math.random() * (max - min) + min).toFixed(3);
+                        }
+                        for(let i = 0; i < 3; i++){
+                            emit(`execute positioned ~${randomNumber(-5, 5)} ~ ~${randomNumber(-5, 5)} run function models_logic:summon/pikachu`)
+                        }
+                    %%>
+
+                    particle poof ~ ~1 ~ 2 2 2 0.5 2000
+                    playsound minecraft:sfx.pika master @a ~ ~ ~ 1 1
+
+                    # kill @e[type=armor_stand,tag=tnt.pokemon_pikachu,distance=..4]
+                    kill @s
+                }
+            }
+            execute(unless block ~ ~ ~ tnt unless entity @e[type=tnt,distance=..0.5]){
+                # Breaking
+                kill @s
+            }
+        }
+        #--- pokemon_pokeball
+        execute if entity @s[tag=tnt.pokemon_pokeball] run{
+            execute(if entity @e[type=tnt,distance=..0.5]){
+                # Teleport itself to the ignited TNT
+                tp @s @e[type=tnt,distance=..0.5,sort=nearest,limit=1]
+
+                # Use its 'fuse_time' scoreboard to link with 'Fuse' of TNT
+                execute store result score @s fuse_time run data get entity @e[type=tnt,distance=..0.5,limit=1] Fuse
+
+                # Runs a particle effect when ignited
+                execute if score @s fuse_time matches 1..80 run block{
+                    particle block white_concrete ~ ~ ~ 1 1 1 1 10
+                    particle block red_concrete ~ ~ ~ 1 1 1 1 10
+                }
+                # Kill the AS if TNT is exploded
+                execute if score @s fuse_time matches 1 run{
+                    kill @e[type=tnt, distance=..0.5]
+                    particle minecraft:explosion ~ ~ ~ 2 2 2 1 100
+                    playsound entity.generic.explode master @a ~ ~ ~
+
+                    particle minecraft:totem_of_undying ~ ~1 ~ 0.5 0.5 0.5 0.1 50
+                    summon item ~ ~ ~ {Motion:[0.1, 0.3, 0.2], Item:{id:"minecraft:snowball",Count:1b,tag:{display:{Name:'{"text":"Pokeball","color":"gold","italic":false}'},pokeball:1b}}}
+                    
+                    
+                    # kill @e[type=armor_stand,tag=tnt.pokemon_pokeball,distance=..4]
+                    kill @s
+                }
+            }
+            execute(unless block ~ ~ ~ tnt unless entity @e[type=tnt,distance=..0.5]){
+                # Breaking
+                kill @s
+            }
+        }
+
+        #--- rainbow_red
+        execute if entity @s[tag=tnt.rainbow_red] run{
+            execute(if entity @e[type=tnt,distance=..0.5]){
+                # Teleport itself to the ignited TNT
+                tp @s @e[type=tnt,distance=..0.5,sort=nearest,limit=1]
+
+                # Use its 'fuse_time' scoreboard to link with 'Fuse' of TNT
+                execute store result score @s fuse_time run data get entity @e[type=tnt,distance=..0.5,limit=1] Fuse
+
+                # Runs a particle effect when ignited
+                execute if score @s fuse_time matches 1..80 run block{
+                    particle block red_concrete ~ ~ ~ 1 1 1 1 20
+                }
+                # Kill the AS if TNT is exploded
+                execute if score @s fuse_time matches 1 run{
+                    kill @e[type=tnt, distance=..0.5]
+                    particle minecraft:explosion ~ ~ ~ 2 2 2 1 100
+                    playsound entity.generic.explode master @a ~ ~ ~
+
+                    LOOP(2,i){
+                        function models_logic:summon/rainbow_red
+                    }
+
+                    particle dust 1 0 0 2 ~ ~1 ~ 2 2 2 1 500
+
+                    # kill @e[type=armor_stand,tag=tnt.rainbow_red,distance=..4]
+                    kill @s
+                }
+            }
+            execute(unless block ~ ~ ~ tnt unless entity @e[type=tnt,distance=..0.5]){
+                # Breaking
+                kill @s
+            }
+        }
+        #--- rainbow_cyan
+        execute if entity @s[tag=tnt.rainbow_cyan] run{
+            execute(if entity @e[type=tnt,distance=..0.5]){
+                # Teleport itself to the ignited TNT
+                tp @s @e[type=tnt,distance=..0.5,sort=nearest,limit=1]
+
+                # Use its 'fuse_time' scoreboard to link with 'Fuse' of TNT
+                execute store result score @s fuse_time run data get entity @e[type=tnt,distance=..0.5,limit=1] Fuse
+
+                # Runs a particle effect when ignited
+                execute if score @s fuse_time matches 1..80 run block{
+                    particle block cyan_concrete ~ ~ ~ 1 1 1 1 20
+                }
+                # Kill the AS if TNT is exploded
+                execute if score @s fuse_time matches 1 run{
+                    kill @e[type=tnt, distance=..0.5]
+                    particle minecraft:explosion ~ ~ ~ 2 2 2 1 100
+                    playsound entity.generic.explode master @a ~ ~ ~
+
+                    playsound minecraft:entity.ender_dragon.shoot master @a ~ ~ ~ 1 0.5
+                    particle minecraft:campfire_signal_smoke ~ ~ ~ 1 1 1 0.2 500
+                    function models_logic:summon/rainbow_cyan
+
+                    # kill @e[type=armor_stand,tag=tnt.rainbow_cyan,distance=..4]
+                    kill @s
+                }
+            }
+            execute(unless block ~ ~ ~ tnt unless entity @e[type=tnt,distance=..0.5]){
+                # Breaking
+                kill @s
+            }
+        }
     }
 }
 
@@ -1004,6 +1178,24 @@ function backrooms_entity{
     tellraw @s {"text":"Spawns a unknown but very powerful mob","color":"green"}
 }
 
+function pokemon_pikachu{
+    givetnt <Pokemon : Pikachu TNT> 110018 pokemon_pikachu
+    tellraw @s {"text":"Spawns friendly Pikachu","color":"green"}
+}
+function pokemon_pokeball{
+    givetnt <Pokemon : Pokeball TNT> 110019 pokemon_pokeball
+    tellraw @s {"text":"Spawns a pokeball which captures a mob","color":"green"}
+}
+
+function rainbow_red{
+    givetnt <Rainbow : Missile Man TNT> 110020 rainbow_red
+    tellraw @s {"text":"Spawns a mob which lauches missile","color":"green"}
+}
+function rainbow_cyan{
+    givetnt <Rainbow : Dinosaur TNT> 110021 rainbow_cyan
+    tellraw @s {"text":"Spawns a dinosaur","color":"green"}
+}
+
 
 function shader_on_creeper{
     spawnpoint @s ~ ~ ~ ~ 
@@ -1039,4 +1231,12 @@ function shader_off_creeper{
         tag @a[tag=on_shader_undo] remove on_shader_undo
     }
 }
+# function tp_mob{
+#     scoreboard players set pokeball_started private 1
+#     execute(if score pokeball_started private matches 1..){
+#         execute as @e[type=#minecraft:passive, limit=1, sort=nearest] run{
+#             tag @s add target_mob
+#         }
+#     }
+# }
 

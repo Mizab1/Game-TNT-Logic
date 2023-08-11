@@ -1,10 +1,32 @@
 [
   [
     "lastUpdate",
-    "Tue Aug 08 2023 20:31:44 GMT+0530 (India Standard Time)"
+    "Fri Aug 11 2023 20:32:39 GMT+0530 (India Standard Time)"
   ],
   [
     "INTERNAL/VIRTUAL_FILE_SYSTEM",
-    {}
+    {
+      "src\\internal.mc": {
+        "data\\minecraft\\tags\\functions\\load.json": 2674682797,
+        "data\\minecraft\\tags\\functions\\tick.json": 4052036264,
+        "data\\internal\\functions\\__generated__\\clock\\0.mcfunction": 991163387,
+        "data\\internal\\functions\\__generated__\\clock\\1.mcfunction": 4124529389,
+        "data\\internal\\functions\\__generated__\\schedule\\0.mcfunction": 152256732,
+        "data\\internal\\functions\\__generated__\\execute\\5.mcfunction": 168895683,
+        "data\\internal\\functions\\tick.mcfunction": 447751398,
+        "data\\internal\\functions\\__generated__\\execute\\8.mcfunction": 101262295,
+        "data\\internal\\functions\\__generated__\\execute\\9.mcfunction": 101262295,
+        "data\\internal\\functions\\__generated__\\schedule\\1.mcfunction": 607242653,
+        "data\\internal\\functions\\__generated__\\execute\\10.mcfunction": 101262295,
+        "data\\internal\\functions\\__generated__\\schedule\\2.mcfunction": 4218078213,
+        "data\\internal\\functions\\__generated__\\schedule\\3.mcfunction": 3712765434,
+        "data\\internal\\functions\\__generated__\\schedule\\4.mcfunction": 3712765434,
+        "data\\internal\\functions\\__generated__\\schedule\\5.mcfunction": 2651396161,
+        "data\\internal\\functions\\__generated__\\schedule\\6.mcfunction": 2651396161,
+        "data\\internal\\functions\\missiles.mcfunction": 3020821549,
+        "data\\internal\\functions\\kill_models.mcfunction": 2959108812,
+        "data\\internal\\tags\\entity_types\\hostile.json": 4066142975
+      }
+    }
   ]
 ]

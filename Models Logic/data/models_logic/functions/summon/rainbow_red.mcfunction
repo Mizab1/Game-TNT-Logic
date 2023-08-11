@@ -1,0 +1,1 @@
+summon cow ~ ~ ~ {DeathLootTable:"minecraft:bat", Silent:1b,Health:15f,Tags:["new","aj_mob","rainbow_red"],ActiveEffects:[{Id:14,Amplifier:1b,Duration:999999,ShowParticles:0b}],Attributes:[{Name:generic.max_health,Base:15}]}

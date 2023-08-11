@@ -317,10 +317,11 @@ entities ded_mobs{
   zombified_piglin
 }
 
-entities laughing_mob{
+entities passive{
   sheep
   cow
   chicken
   pig
   ocelot
+  horse
 }

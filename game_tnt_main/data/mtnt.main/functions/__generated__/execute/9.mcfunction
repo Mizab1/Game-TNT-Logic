@@ -1,19 +1,7 @@
 #built using mc-build (https://github.com/mc-build/mc-build)
 
-execute if entity @s[tag=amongus_imposter] run function mtnt.main:__generated__/execute/10
-execute if entity @s[tag=amongus_emergency] run function mtnt.main:__generated__/execute/11
-execute if entity @s[tag=poppy_plushies] run function mtnt.main:__generated__/execute/12
-execute if entity @s[tag=poppy_huggy] run function mtnt.main:__generated__/execute/13
-execute if entity @s[tag=poppy_mommy] run function mtnt.main:__generated__/execute/14
-execute if entity @s[tag=fnaf_animatronics] run function mtnt.main:__generated__/execute/15
-execute if entity @s[tag=fnaf_darkness] run function mtnt.main:__generated__/execute/16
-execute if entity @s[tag=fortnite_storm] run function mtnt.main:__generated__/execute/17
-execute if entity @s[tag=fortnite_llama] run function mtnt.main:__generated__/execute/18
-execute if entity @s[tag=roblox_animal] run function mtnt.main:__generated__/execute/19
-execute if entity @s[tag=roblox_noob] run function mtnt.main:__generated__/execute/20
-execute if entity @s[tag=minecraft_creeper] run function mtnt.main:__generated__/execute/21
-execute if entity @s[tag=minecraft_endermen] run function mtnt.main:__generated__/execute/22
-execute if entity @s[tag=mario_mystery] run function mtnt.main:__generated__/execute/23
-execute if entity @s[tag=mario_bowser] run function mtnt.main:__generated__/execute/24
-execute if entity @s[tag=backrooms_maze] run function mtnt.main:__generated__/execute/25
-execute if entity @s[tag=backrooms_entity] run function mtnt.main:__generated__/execute/26
+effect give @e[type=#minecraft:passive, distance=..3] invisibility 5 0 true
+particle poof ~ ~ ~ 1 1 1 0.5 1000
+playsound minecraft:block.lava.extinguish master @a ~ ~ ~ 1 1.8
+summon item ~ ~ ~ {Item:{id:"minecraft:heart_of_the_sea",Count:1b,tag:{display:{Name:'{"text":"Catched Pokemon","color":"gold","italic":false}'},Enchantments:[{}]}}}
+kill @s
