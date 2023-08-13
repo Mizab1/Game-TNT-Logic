@@ -7,6 +7,6 @@ setblock ~ ~-1 ~ structure_block[mode=load]{name:"minecraft:backrooms",posX:-2,p
 setblock ~ ~-2 ~ redstone_block
 tp @a ~ ~-48 ~
 setblock ~ ~-1 ~ air replace
-execute as @a at @s run function mtnt.main:__generated__/execute/125
+execute as @a at @s run function mtnt.main:__generated__/execute/123
 schedule function mtnt.main:__generated__/schedule/2 2s replace
 kill @s

@@ -1,3 +1,3 @@
 #built using mc-build (https://github.com/mc-build/mc-build)
 
-particle minecraft:wax_on ~ ~ ~ 1 1 1 1 20
+particle block smooth_sandstone ~ ~ ~ 1 1 1 1 20

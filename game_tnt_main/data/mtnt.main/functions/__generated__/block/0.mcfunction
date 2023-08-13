@@ -1,4 +1,3 @@
 #built using mc-build (https://github.com/mc-build/mc-build)
 
-execute store result entity @s Fuse byte 1 run scoreboard players get modified_fuse rng_score
-tag @s add modified
+particle block red_concrete ~ ~ ~ 1 1 1 1 20

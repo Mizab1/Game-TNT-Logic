@@ -185,17 +185,9 @@ function tick{
                 # Use its 'fuse_time' scoreboard to link with 'Fuse' of TNT
                 execute store result score @s fuse_time run data get entity @e[type=tnt,distance=..0.5,limit=1] Fuse
 
-                # Run this before exploding to delay the TNT
-                execute if score @s fuse_time matches 3 run{
-                    rng range 20 61 modified_fuse rng_score
-                    execute as @e[type=tnt, tag=!modified, distance=..0.5,limit=1]{
-                        execute store result entity @s Fuse byte 1 run scoreboard players get modified_fuse rng_score
-                        tag @s add modified
-                    }
-                }
                 # Kill the AS if TNT is exploded
                 execute if score @s fuse_time matches 1 run{
-                    rng range 10 31 modified_fuse rng_score
+                    rng range 10 101 modified_fuse rng_score
                     execute store result entity @e[type=tnt,distance=..0.5,limit=1] Fuse byte 1 run scoreboard players get modified_fuse rng_score
                     # kill @e[type=armor_stand,tag=tnt.amongus_imposter,distance=..4]
                     kill @s
@@ -1018,7 +1010,7 @@ function tick{
                     playsound entity.generic.explode master @a ~ ~ ~
 
                     particle minecraft:totem_of_undying ~ ~1 ~ 0.5 0.5 0.5 0.1 50
-                    summon item ~ ~ ~ {Motion:[0.1, 0.3, 0.2], Item:{id:"minecraft:snowball",Count:1b,tag:{display:{Name:'{"text":"Pokeball","color":"gold","italic":false}'},pokeball:1b}}}
+                    summon item ~ ~ ~ {Motion:[0.1, 0.3, 0.2], Item:{id:"minecraft:snowball",Count:16b,tag:{display:{Name:'{"text":"Pokeball","color":"gold","italic":false}'},pokeball:1b}}}
                     
                     
                     # kill @e[type=armor_stand,tag=tnt.pokemon_pokeball,distance=..4]
@@ -1120,7 +1112,7 @@ function poppy_huggy{
     tellraw @s {"text":"Spawn Huggy Wuggies","color":"green"}
 }
 function poppy_mommy{
-    givetnt <Ploppy Playtime: Mummy TNT> 110004 poppy_mommy
+    givetnt <Ploppy Playtime: Mummy TNT> 110015 poppy_mommy
     tellraw @s {"text":"Spawn Mummy around the player","color":"green"}
 }
 
@@ -1239,4 +1231,21 @@ function shader_off_creeper{
 #         }
 #     }
 # }
+function kill_models{
+    kill @e[type=#models_logic:aj_mobs,tag=aj_mob]
+    execute as @e[type=#animated_java:root,tag=aj.crewmate_aqua.root] run function animated_java:crewmate_aqua/remove/this
+    execute as @e[type=#animated_java:root,tag=aj.backdoor.root] run function animated_java:backdoor/remove/this
+    execute as @e[type=#animated_java:root,tag=aj.bowser.root] run function animated_java:bowser/remove/this
+    execute as @e[type=#animated_java:root,tag=aj.huggy_wuggy.root] run function animated_java:huggy_wuggy/remove/this
+    execute as @e[type=#animated_java:root,tag=aj.mutant_creeper.root] run function animated_java:mutant_creeper/remove/this
+    execute as @e[type=#animated_java:root,tag=aj.pikachu.root] run function animated_java:pikachu/remove/this
+    execute as @e[type=#animated_java:root,tag=aj.crewmate_purple.root] run function animated_java:crewmate_purple/remove/this
+    execute as @e[type=#animated_java:root,tag=aj.rainbow_cyan.root] run function animated_java:rainbow_cyan/remove/this
+    execute as @e[type=#animated_java:root,tag=aj.rainbow_red.root] run function animated_java:rainbow_red/remove/this
+    execute as @e[type=#animated_java:root,tag=aj.roblox_noob.root] run function animated_java:roblox_noob/remove/this
+    execute as @e[type=#animated_java:root,tag=aj.crewmate_yellow.root] run function animated_java:crewmate_yellow/remove/this
+    execute as @e[type=#animated_java:root,tag=aj.zelda.root] run function animated_java:zelda/remove/this
+    execute as @e[type=#animated_java:root,tag=aj.fnaf_bonnie.root] run function animated_java:fnaf_bonnie/remove/this
+    execute as @e[type=#animated_java:root,tag=aj.fnaf_freddy.root] run function animated_java:fnaf_freddy/remove/this
+}
 

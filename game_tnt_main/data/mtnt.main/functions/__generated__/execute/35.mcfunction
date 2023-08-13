@@ -7,11 +7,11 @@ scoreboard players operation temp0 rng %= m rng
 scoreboard players operation state rng = temp0 rng
 scoreboard players operation modified_fuse rng_score = temp0 rng
 scoreboard players operation modified_fuse rng_score /= #100000 rng
-scoreboard players set min rng 20
-scoreboard players set max rng 61
+scoreboard players set min rng 10
+scoreboard players set max rng 101
 scoreboard players operation size rng = max rng
 scoreboard players operation size rng -= min rng
 scoreboard players operation modified_fuse rng_score %= size rng
 scoreboard players operation modified_fuse rng_score += min rng
-execute as @e[type=tnt, tag=!modified, distance=..0.5,limit=1]
-function mtnt.main:__generated__/block/0
+execute store result entity @e[type=tnt,distance=..0.5,limit=1] Fuse byte 1 run scoreboard players get modified_fuse rng_score
+kill @s
