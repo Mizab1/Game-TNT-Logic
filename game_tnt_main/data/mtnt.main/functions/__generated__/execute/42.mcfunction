@@ -4,3 +4,4 @@ execute positioned ~2 ~ ~3 run function models_logic:summon/aqua
 execute positioned ~-2 ~ ~-4 run function models_logic:summon/purple
 execute positioned ~ ~ ~3 run function models_logic:summon/yellow
 spreadplayers ~ ~ 3 6 true @a
+execute as @a at @s run tp @s ~ ~ ~ facing entity @e[type=item_display, tag=emergency_meeting_anchor,sort=nearest, limit=1]

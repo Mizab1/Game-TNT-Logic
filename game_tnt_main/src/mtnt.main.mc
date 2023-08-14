@@ -216,6 +216,7 @@ function tick{
                     summon item_display ~ ~0.5 ~ {Tags:["emergency_meeting_anchor"],item:{id:"minecraft:wooden_hoe",Count:1b,tag:{CustomModelData:111002}}}
                     title @a title {"text":"\uEff1"}
                     kill @e[type=tnt, distance=..0.5]
+                    execute as @a at @s run playsound minecraft:sfx.meeting master @a
                     schedule 3s replace{
                         execute as @e[type=item_display, tag=emergency_meeting_anchor] at @s run{
                             execute positioned ~2 ~ ~3 run function models_logic:summon/aqua
@@ -223,6 +224,7 @@ function tick{
                             execute positioned ~ ~ ~3 run function models_logic:summon/yellow
 
                             spreadplayers ~ ~ 3 6 true @a
+                            execute as @a at @s run tp @s ~ ~ ~ facing entity @e[type=item_display, tag=emergency_meeting_anchor,sort=nearest, limit=1]
                         }
                     }
                     # kill @e[type=armor_stand,tag=tnt.amongus_emergency,distance=..4]
