@@ -1098,96 +1098,99 @@ function tick{
 #> TNT Command
 function amongus_imposter{
     givetnt <Among Us: Imposter TNT> 110001 amongus_imposter
-    tellraw @s {"text":"Explodes at random timing","color":"green"}
+    tellraw @a {"text":"Boom! TNT goes kaboom whenever it feels like it!.","color":"green"}
 }
 function amongus_emergency{
     givetnt <Among Us: Emergency Meeting TNT> 110002 amongus_emergency
-    tellraw @s {"text":"Gathers the player for emergency meeting","color":"green"}
+    tellraw @a {"text":"Get everyone together for a super important meeting!","color":"green"}
 }
 
 function poppy_plushies{
     givetnt <Ploppy Playtime: Plushes TNT> 110003 poppy_plushies
-    tellraw @s {"text":"Spawn bunch of plushies","color":"green"}
+    tellraw @a {"text":"Make a whole bunch of cute plushies appear!","color":"green"}
 }
 function poppy_huggy{
     givetnt <Ploppy Playtime: Huggy Wuggy TNT> 110004 poppy_huggy
-    tellraw @s {"text":"Spawn Huggy Wuggies","color":"green"}
+    tellraw @a {"text":"Magic time! Bring out the Huggy Wuggies!","color":"green"}
 }
 function poppy_mommy{
     givetnt <Ploppy Playtime: Mummy TNT> 110015 poppy_mommy
-    tellraw @s {"text":"Spawn Mummy around the player","color":"green"}
+    tellraw @a {"text":"Surround the player with lots of Huggy Wuggies!","color":"green"}
 }
 
 function fnaf_animatronics{
     givetnt <Five Nights At Freddys: Animatronics TNT> 110005 fnaf_animatronics
-    tellraw @s {"text":"Spawn bunch of Animatronics","color":"green"}
+    tellraw @a {"text":"Time for a surprise! Bring out a bunch of animatronics to play!","color":"green"}
 }
 function fnaf_darkness{
     givetnt <Five Nights At Freddys: Darkness TNT> 110006 fnaf_darkness
-    tellraw @s {"text":"Alive Animatronics!!","color":"green"}
+    tellraw @a {"text":"Guess what? The animatronics are alive!","color":"green"}
 }
 
 function fortnite_storm{
     givetnt <Fortnite : Storm TNT> 110007 fortnite_storm
-    tellraw @s {"text":"Storm which damages the player outside the radius. The storm will be gone after 20 secs","color":"green"}
+    tellraw @a {"text":"Uh-oh! There's a wild storm that can hurt you if you're outside its area. But don't worry, it'll disappear in 20 seconds!","color":"green"}
 }
 function fortnite_llama{
     givetnt <Fortnite : Llama TNT> 110008 fortnite_llama
-    tellraw @s {"text":"Spawns llama that gives loots","color":"green"}
+    tellraw @a {"text":"Watch the magic! A llama appears, and it's full of cool stuff for you! but only when you hit it","color":"green"}
 }
 
 function roblox_animal{
     givetnt <Roblox : Animal TNT> 110009 roblox_animal
-    tellraw @s {"text":"Spawns many roblox animals","color":"green"}
+    tellraw @a {"text":"Time to bring the Roblox world to life with lots of animals all around!","color":"green"}
 }
 function roblox_noob{
     givetnt <Roblox : Noob TNT> 110010 roblox_noob
-    tellraw @s {"text":"Spawns Roblox Noob","color":"green"}
+    tellraw @a {"text":"Get ready for some fun! The Roblox Noob is here to join in the excitement!","color":"green"}
 }
 
 function minecraft_creeper{
     givetnt <Minecraft : Mutant Creeper TNT> 110011 minecraft_creeper
-    tellraw @s {"text":"Spawns Mutant Creeper","color":"green"}
+    tellraw @a {"text":"Hold on tight! A super-sized mutant creeper is popping up to say hello and maybe they will explode in your face? who knows!","color":"green"}
 }
 function minecraft_endermen{
     givetnt <Minecraft : Enderman TNT> 110012 minecraft_endermen
-    tellraw @s {"text":"Teleports the player randomly","color":"green"}
+    tellraw @a {"text":"Get ready for a surprise adventure! You're going to teleport to a random place!","color":"green"}
 }
 
 function mario_mystery{
     givetnt <Mario : Mystery TNT> 110013 mario_mystery
-    tellraw @s {"text":"Give random items or powerups","color":"green"}
+    tellraw @a {"text":"Abracadabra! You just got a surprise gift of random items or super cool power-ups!","color":"green"}
 }
 function mario_bowser{
     givetnt <Mario : Bowser TNT> 110014 mario_bowser
-    tellraw @s {"text":"Spawns bowser","color":"green"}
+    tellraw @a {"text":"Look out, it's Bowser! He's joining the fun!","color":"green"}
 }
 
 function backrooms_maze{
     givetnt <Backrooms : Level 0 TNT> 110016 backrooms_maze
-    tellraw @s {"text":"Builds a level 0 maze","color":"green"}
+    tellraw @a {"text":"Hold on, we're going on a maze adventure! You're getting teleported to a level 0 maze!","color":"green"}
 }
 function backrooms_entity{
     givetnt <Backrooms : Unknown Entity TNT> 110017 backrooms_entity
-    tellraw @s {"text":"Spawns a unknown but very powerful mob","color":"green"}
+    tellraw @a {"text":"Get ready for a challenge! An unknown and super strong creature is about to appear!","color":"green"}
 }
 
 function pokemon_pikachu{
     givetnt <Pokemon : Pikachu TNT> 110018 pokemon_pikachu
-    tellraw @s {"text":"Spawns friendly Pikachu","color":"green"}
+    tellraw @a {"text":"Get ready for cuteness overload! A friendly Pikachu is joining your team!","color":"green"}
 }
 function pokemon_pokeball{
     givetnt <Pokemon : Pokeball TNT> 110019 pokemon_pokeball
-    tellraw @s {"text":"Spawns a pokeball which captures a mob","color":"green"}
+    tellraw @a {"text":"Check this out! A magical Pokéball appears, and you can use it to capture a mob!","color":"green"}
+
+    give @p minecraft:cow_spawn_egg 16
+    give @p minecraft:chicken_spawn_egg 16
 }
 
 function rainbow_red{
     givetnt <Rainbow : Missile Man TNT> 110020 rainbow_red
-    tellraw @s {"text":"Spawns a mob which lauches missile","color":"green"}
+    tellraw @a {"text":"Get ready for a blast! A mob that can launch missiles is coming your way!","color":"green"}
 }
 function rainbow_cyan{
     givetnt <Rainbow : Dinosaur TNT> 110021 rainbow_cyan
-    tellraw @s {"text":"Spawns a dinosaur","color":"green"}
+    tellraw @a {"text":"Get ready for prehistoric fun! A dinosaur is about to appear!","color":"green"}
 }
 
 
