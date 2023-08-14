@@ -583,7 +583,7 @@ function tick{
                             return (Math.random() * (max - min) + min).toFixed(3);
                         }
                         for(let i = 0; i < 10; i++){
-                            emit(`summon llama ~${randomNumber(-15, 15)} ~ ~${randomNumber(-15, 15)} {DeathLootTable:"minecraft:bat", Health:8f, NoAI:1b,Variant:0,Tags:["loot_llama"],CustomName:'{"text":"Loot Llama","color":"gold","italic":false}', Rotation:[${randomNumber(-180, 180)}F,0F], Attributes:[{Name:generic.max_health,Base:8}]}`)
+                            emit(`summon llama ~${randomNumber(-8, 8)} ~ ~${randomNumber(-8, 8)} {DeathLootTable:"minecraft:bat", Health:8f, NoAI:1b,Variant:0,Tags:["loot_llama"],CustomName:'{"text":"Loot Llama","color":"gold","italic":false}', Rotation:[${randomNumber(-180, 180)}F,0F], Attributes:[{Name:generic.max_health,Base:8}]}`)
                         }
                     %%>
 

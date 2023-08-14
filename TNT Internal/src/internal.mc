@@ -56,6 +56,7 @@ function missiles{
 }
 
 entities hostile{
+    minecraft:enderman
     minecraft:blaze
     minecraft:creeper
     minecraft:drowned
