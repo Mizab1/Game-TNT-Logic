@@ -10,6 +10,9 @@ execute as @e[type=#models_logic:aj_mobs,tag=backdoor,tag=aj_mob] at @s run func
 execute as @e[type=#models_logic:aj_mobs,tag=pikachu,tag=aj_mob] at @s run function models_logic:ai/pikachu
 execute as @e[type=#models_logic:aj_mobs,tag=rainbow_red,tag=aj_mob] at @s run function models_logic:ai/rainbow_red
 execute as @e[type=#models_logic:aj_mobs,tag=rainbow_cyan,tag=aj_mob] at @s run function models_logic:ai/rainbow_cyan
+execute as @e[type=#models_logic:aj_mobs,tag=elephant,tag=aj_mob] at @s run function models_logic:ai/elephant
+execute as @e[type=#models_logic:aj_mobs,tag=penguin,tag=aj_mob] at @s run function models_logic:ai/penguin
+execute as @e[type=#models_logic:aj_mobs,tag=deer,tag=aj_mob] at @s run function models_logic:ai/deer
 
 
 execute as @e[type=#models_logic:aj_mobs, tag=new,tag=aj_mob] at @s run function models_logic:new
@@ -28,3 +31,6 @@ execute as @e[type=item_display, tag=aj.backdoor.root] at @s unless entity @e[ty
 execute as @e[type=item_display, tag=aj.pikachu.root] at @s unless entity @e[type=#models_logic:aj_mobs,tag=pikachu,tag=aj_mob,distance=..1] run function animated_java:pikachu/zzzzzzzz/remove/as_root
 execute as @e[type=item_display, tag=aj.rainbow_red.root] at @s unless entity @e[type=#models_logic:aj_mobs,tag=rainbow_red,tag=aj_mob,distance=..1] run function animated_java:rainbow_red/zzzzzzzz/remove/as_root
 execute as @e[type=item_display, tag=aj.rainbow_cyan.root] at @s unless entity @e[type=#models_logic:aj_mobs,tag=rainbow_cyan,tag=aj_mob,distance=..1] run function animated_java:rainbow_cyan/zzzzzzzz/remove/as_root
+execute as @e[type=item_display, tag=aj.elephant.root] at @s unless entity @e[type=#models_logic:aj_mobs,tag=elephant,tag=aj_mob,distance=..1] run function animated_java:elephant/zzzzzzzz/remove/as_root
+execute as @e[type=item_display, tag=aj.penguin.root] at @s unless entity @e[type=#models_logic:aj_mobs,tag=penguin,tag=aj_mob,distance=..1] run function animated_java:penguin/zzzzzzzz/remove/as_root
+execute as @e[type=item_display, tag=aj.deer.root] at @s unless entity @e[type=#models_logic:aj_mobs,tag=deer,tag=aj_mob,distance=..1] run function animated_java:deer/zzzzzzzz/remove/as_root
