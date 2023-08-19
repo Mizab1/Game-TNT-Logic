@@ -5,6 +5,7 @@ scoreboard objectives add fuse_time dummy
 scoreboard objectives add rng_score dummy
 scoreboard objectives add private dummy
 scoreboard objectives add hurt_time_llama dummy
+scoreboard objectives add llama_health dummy
 scoreboard objectives add rc_clicked minecraft.used:minecraft.carrot_on_a_stick
 gamerule universalAnger true
 gamerule showDeathMessages false

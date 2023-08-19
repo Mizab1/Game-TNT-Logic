@@ -1,8 +1,6 @@
 #built using mc-build (https://github.com/mc-build/mc-build)
 
-kill @e[type=tnt, distance=..0.5]
-particle minecraft:explosion ~ ~ ~ 2 2 2 1 100
-playsound entity.generic.explode master @a ~ ~ ~
-particle minecraft:totem_of_undying ~ ~1 ~ 0.5 0.5 0.5 0.1 50
-summon item ~ ~ ~ {Motion:[0.1, 0.3, 0.2], Item:{id:"minecraft:snowball",Count:16b,tag:{display:{Name:'{"text":"Pokeball","color":"gold","italic":false}'},pokeball:1b}}}
-kill @s
+scoreboard players set #execute LANG_MC_INTERNAL 0
+execute if entity @e[type=tnt,distance=..0.5] run function mtnt.main:__generated__/conditional/37
+scoreboard players set #execute LANG_MC_INTERNAL 0
+execute unless block ~ ~ ~ tnt unless entity @e[type=tnt,distance=..0.5] run function mtnt.main:__generated__/conditional/38

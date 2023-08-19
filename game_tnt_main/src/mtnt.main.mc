@@ -9,6 +9,7 @@ function load{
     scoreboard objectives add rng_score dummy
     scoreboard objectives add private dummy
     scoreboard objectives add hurt_time_llama dummy
+    scoreboard objectives add llama_health dummy
 
     scoreboard objectives add rc_clicked minecraft.used:minecraft.carrot_on_a_stick
 
@@ -60,6 +61,11 @@ function tick{
 
     # loot llama
     execute as @e[type=llama, tag=loot_llama] at @s run{
+        execute store result score @s llama_health run data get entity @s Health
+        execute if score @s llama_health matches ..10 run{
+            summon creeper ~ ~ ~ {Fuse:0, ignited:1b, ExplosionRadius:-10b}
+            kill @s
+        }
         execute store result score @s hurt_time_llama run data get entity @s HurtTime
         execute if score @s hurt_time_llama matches 10 run{
             loot spawn ~ ~ ~ loot minecraft:loot_llama
@@ -189,6 +195,10 @@ function tick{
                 execute if score @s fuse_time matches 1 run{
                     rng range 10 101 modified_fuse rng_score
                     execute store result entity @e[type=tnt,distance=..0.5,limit=1] Fuse byte 1 run scoreboard players get modified_fuse rng_score
+                    tag @a[limit=1, sort=nearest] add viewing_animation
+                    schedule 10t replace{
+                        execute as @a[tag=viewing_animation] run function mtnt.main:death_anim
+                    }
                     # kill @e[type=armor_stand,tag=tnt.amongus_imposter,distance=..4]
                     kill @s
                 }
@@ -223,7 +233,7 @@ function tick{
                             execute positioned ~-2 ~ ~-4 run function models_logic:summon/purple
                             execute positioned ~ ~ ~3 run function models_logic:summon/yellow
 
-                            spreadplayers ~ ~ 3 6 true @a
+                            spreadplayers ~ ~ 3 6 true @e[type=#aestd1:living_base, tag=!aj_mob]
                             execute as @a at @s run tp @s ~ ~ ~ facing entity @e[type=item_display, tag=emergency_meeting_anchor,sort=nearest, limit=1]
                         }
                     }
@@ -583,7 +593,7 @@ function tick{
                             return (Math.random() * (max - min) + min).toFixed(3);
                         }
                         for(let i = 0; i < 10; i++){
-                            emit(`summon llama ~${randomNumber(-8, 8)} ~ ~${randomNumber(-8, 8)} {DeathLootTable:"minecraft:bat", Health:8f, NoAI:1b,Variant:0,Tags:["loot_llama"],CustomName:'{"text":"Loot Llama","color":"gold","italic":false}', Rotation:[${randomNumber(-180, 180)}F,0F], Attributes:[{Name:generic.max_health,Base:8}]}`)
+                            emit(`summon llama ~${randomNumber(-8, 8)} ~ ~${randomNumber(-8, 8)} {DeathLootTable:"minecraft:bat", Health:18f, NoAI:1b,Variant:0,Tags:["loot_llama"],CustomName:'{"text":"Loot Llama","color":"gold","italic":false}', Rotation:[${randomNumber(-180, 180)}F,0F], Attributes:[{Name:generic.max_health,Base:18}]}`)
                         }
                     %%>
 
@@ -1114,8 +1124,8 @@ function poppy_huggy{
     tellraw @a {"text":"Magic time! Bring out the Huggy Wuggies!","color":"green"}
 }
 function poppy_mommy{
-    givetnt <Ploppy Playtime: Mummy TNT> 110015 poppy_mommy
-    tellraw @a {"text":"Surround the player with lots of Huggy Wuggies!","color":"green"}
+    givetnt <Ploppy Playtime: Whirling TNT> 110015 poppy_mommy
+    tellraw @a {"text":"Spawns huggy wuggy who encircles around the player!","color":"green"}
 }
 
 function fnaf_animatronics{
@@ -1254,3 +1264,31 @@ function kill_models{
     execute as @e[type=#animated_java:root,tag=aj.fnaf_freddy.root] run function animated_java:fnaf_freddy/remove/this
 }
 
+# function amongus_kill_animation{
+#     summon armor_stand ~ ~ ~ {Invisible:1b,Tags:["animation_aS"],ArmorItems:[{},{},{},{id:"minecraft:wooden_hoe",Count:1b,tag:{CustomModelData:100001}}]}
+#     execute as @a[limit=1] at @s run{
+#         tag @s add viewing_animation
+#         effect give @s slowness 20 100 true
+#     }
+# }
+
+function death_anim{
+    sequence{
+        LOOP(6,i){
+            execute as @a[tag=viewing_animation] run{
+                title @a times 1 20 1
+                <%%
+                    emit(`title @a title {"text":"\\uEff${i+2}"}`)
+                    if(i === 5){
+                        emit(`kill @s`)
+                    }
+                %%>
+                
+            }
+            delay 10t
+        }
+        
+    }
+}
+
+# /summon minecraft:armor_stand ~ ~1.3 ~ {NoGravity:1b,Invisible:1b,NoBasePlate:1b,ArmorItems:[{},{},{},{id:"minecraft:player_head",Count:1b,tag:{SkullOwner:{Id:[I;-353789820,915230000,-2027186729,650451379],Properties:{textures:[{Value:"eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZDNlZGNmNjFhZDVkYTdmMGYxMzVmNzZlNDE1NWVjYTEyMWI3ZmRlMTlkM2Q4NTM3OTVkMDIwM2ZmMDE5MWM0OCJ9fX0="}]}}}}]}

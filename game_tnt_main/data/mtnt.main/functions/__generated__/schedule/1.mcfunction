@@ -1,4 +1,3 @@
 #built using mc-build (https://github.com/mc-build/mc-build)
 
-kill @e[type=item_display, tag=storm]
-tellraw @a {"text":"Storm is gone", "color":"gold"}
+execute as @e[type=item_display, tag=emergency_meeting_anchor] at @s run function mtnt.main:__generated__/execute/45
