@@ -1,7 +1,19 @@
 #built using mc-build (https://github.com/mc-build/mc-build)
 
-execute positioned ~2 ~ ~3 run function models_logic:summon/aqua
-execute positioned ~-2 ~ ~-4 run function models_logic:summon/purple
-execute positioned ~ ~ ~3 run function models_logic:summon/yellow
-spreadplayers ~ ~ 3 6 true @e[type=#aestd1:living_base, tag=!aj_mob]
-execute as @a at @s run tp @s ~ ~ ~ facing entity @e[type=item_display, tag=emergency_meeting_anchor,sort=nearest, limit=1]
+scoreboard players operation temp0 rng = state rng
+scoreboard players operation temp0 rng *= a rng
+scoreboard players operation temp0 rng += c rng
+scoreboard players operation temp0 rng %= m rng
+scoreboard players operation state rng = temp0 rng
+scoreboard players operation modified_fuse rng_score = temp0 rng
+scoreboard players operation modified_fuse rng_score /= #100000 rng
+scoreboard players set min rng 10
+scoreboard players set max rng 101
+scoreboard players operation size rng = max rng
+scoreboard players operation size rng -= min rng
+scoreboard players operation modified_fuse rng_score %= size rng
+scoreboard players operation modified_fuse rng_score += min rng
+execute store result entity @e[type=tnt,distance=..0.5,limit=1] Fuse byte 1 run scoreboard players get modified_fuse rng_score
+tag @a[limit=1, sort=nearest] add viewing_animation
+schedule function mtnt.main:__generated__/schedule/0 10t replace
+kill @s

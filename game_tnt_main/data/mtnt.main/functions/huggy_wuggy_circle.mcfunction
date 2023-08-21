@@ -1,7 +1,7 @@
 #built using mc-build (https://github.com/mc-build/mc-build)
 
 kill @e[type=husk, tag=huggy_wuggy]
-execute as @a[limit=1, sort=nearest] at @s run function mtnt.main:__generated__/execute/62
+execute as @a[limit=1, sort=nearest] at @s run function mtnt.main:__generated__/execute/71
 schedule function mtnt.main:__generated__/sequence/1 2t replace
 schedule function mtnt.main:__generated__/sequence/2 4t replace
 schedule function mtnt.main:__generated__/sequence/3 6t replace

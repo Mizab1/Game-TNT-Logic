@@ -1,6 +1,9 @@
 clock 1s{
     # Summons lightning when pikachu is near any hostile mobs
-    execute as @e[type=#internal:hostile] at @s if entity @e[type=#models_logic:aj_mobs,tag=pikachu,tag=aj_mob, distance=..15] run summon lightning_bolt ~ ~ ~
+    execute as @e[type=#internal:hostile] at @s if entity @e[type=#models_logic:aj_mobs,tag=pikachu,tag=aj_mob, distance=..15] run{
+        summon lightning_bolt ~ ~ ~
+        execute as @e[type=#models_logic:aj_mobs,tag=pikachu,tag=aj_mob] at @s run particle flash ~ ~ ~ 0 0 0 1 10
+    }
 }
 
 clock 8s{

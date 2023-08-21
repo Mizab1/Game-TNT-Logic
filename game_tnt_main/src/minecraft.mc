@@ -86,7 +86,7 @@ loot_table mystery_tnt{
   "type": "minecraft:generic",
   "pools": [
     {
-      "rolls": 5,
+      "rolls": 1,
       "bonus_rolls": 0,
       "entries": [
         {
@@ -98,10 +98,57 @@ loot_table mystery_tnt{
               "functions": [
                 {
                   "function": "minecraft:set_count",
-                  "count": {
-                    "min": 1,
-                    "max": 3
+                  "count": 1
+                },
+                {
+                  "function": "minecraft:set_name",
+                  "entity": "this",
+                  "name": {
+                    "text" : "Mushroom",
+                    "italic": false
                   }
+                },
+                {
+                  "function": "minecraft:set_lore",
+                  "entity": "this",
+                  "lore": [
+                    {
+                      "text": "Right Click to use it",
+                      "color": "minecraft:dark_purple",
+                      "italic": false
+                    }
+                  ],
+                  "replace": false
+                }
+              ]
+            },
+            {
+              "type": "minecraft:item",
+              "name": "minecraft:golden_apple",
+              "functions": [
+                {
+                  "function": "minecraft:set_count",
+                  "count": 1
+                },
+                {
+                  "function": "minecraft:set_name",
+                  "entity": "this",
+                  "name": {
+                    "text" : "Mushroom",
+                    "italic": false
+                  }
+                },
+                {
+                  "function": "minecraft:set_lore",
+                  "entity": "this",
+                  "lore": [
+                    {
+                      "text": "Right Click to use it",
+                      "color": "minecraft:dark_purple",
+                      "italic": false
+                    }
+                  ],
+                  "replace": false
                 }
               ]
             },
@@ -112,6 +159,26 @@ loot_table mystery_tnt{
                 {
                   "function": "minecraft:set_potion",
                   "id": "minecraft:long_swiftness"
+                },
+                {
+                  "function": "minecraft:set_name",
+                  "entity": "this",
+                  "name": {
+                    "text" : "Star",
+                    "italic": false
+                  }
+                },
+                {
+                  "function": "minecraft:set_lore",
+                  "entity": "this",
+                  "lore": [
+                    {
+                      "text": "Right Click to use it",
+                      "color": "minecraft:dark_purple",
+                      "italic": false
+                    }
+                  ],
+                  "replace": true
                 }
               ]
             },
@@ -122,6 +189,26 @@ loot_table mystery_tnt{
                 {
                   "function": "minecraft:set_potion",
                   "id": "minecraft:strong_leaping"
+                },
+                {
+                  "function": "minecraft:set_name",
+                  "entity": "this",
+                  "name": {
+                    "text" : "Star",
+                    "italic": false
+                  }
+                },
+                {
+                  "function": "minecraft:set_lore",
+                  "entity": "this",
+                  "lore": [
+                    {
+                      "text": "Right Click to use it",
+                      "color": "minecraft:dark_purple",
+                      "italic": false
+                    }
+                  ],
+                  "replace": true
                 }
               ]
             },
@@ -132,6 +219,26 @@ loot_table mystery_tnt{
                 {
                   "function": "minecraft:set_potion",
                   "id": "minecraft:long_regeneration"
+                },
+                {
+                  "function": "minecraft:set_name",
+                  "entity": "this",
+                  "name": {
+                    "text" : "Star",
+                    "italic": false
+                  }
+                },
+                {
+                  "function": "minecraft:set_lore",
+                  "entity": "this",
+                  "lore": [
+                    {
+                      "text": "Right Click to use it",
+                      "color": "minecraft:dark_purple",
+                      "italic": false
+                    }
+                  ],
+                  "replace": true
                 }
               ]
             },
@@ -142,6 +249,26 @@ loot_table mystery_tnt{
                 {
                   "function": "minecraft:set_potion",
                   "id": "minecraft:healing"
+                },
+                {
+                  "function": "minecraft:set_name",
+                  "entity": "this",
+                  "name": {
+                    "text" : "Star",
+                    "italic": false
+                  }
+                },
+                {
+                  "function": "minecraft:set_lore",
+                  "entity": "this",
+                  "lore": [
+                    {
+                      "text": "Right Click to use it",
+                      "color": "minecraft:dark_purple",
+                      "italic": false
+                    }
+                  ],
+                  "replace": true
                 }
               ]
             },
@@ -152,68 +279,26 @@ loot_table mystery_tnt{
                 {
                   "function": "minecraft:set_potion",
                   "id": "minecraft:invisibility"
-                }
-              ]
-            },
-            {
-              "type": "minecraft:item",
-              "name": "minecraft:netherite_sword",
-              "functions": [
+                },
                 {
-                  "function": "minecraft:set_count",
-                  "count": {
-                    "min": 0,
-                    "max": 1
+                  "function": "minecraft:set_name",
+                  "entity": "this",
+                  "name": {
+                    "text" : "Star",
+                    "italic": false
                   }
-                }
-              ]
-            },
-            {
-              "type": "minecraft:item",
-              "name": "minecraft:diamond_block",
-              "functions": [
+                },
                 {
-                  "function": "minecraft:set_count",
-                  "count": {
-                    "min": 1,
-                    "max": 2
-                  }
-                }
-              ]
-            },
-            {
-              "type": "minecraft:item",
-              "name": "minecraft:netherite_block",
-              "functions": [
-                {
-                  "function": "minecraft:set_count",
-                  "count": 1
-                }
-              ]
-            },
-            {
-              "type": "minecraft:item",
-              "name": "minecraft:iron_block",
-              "functions": [
-                {
-                  "function": "minecraft:set_count",
-                  "count": {
-                    "min": 1,
-                    "max": 3
-                  }
-                }
-              ]
-            },
-            {
-              "type": "minecraft:item",
-              "name": "minecraft:gold_block",
-              "functions": [
-                {
-                  "function": "minecraft:set_count",
-                  "count": {
-                    "min": 1,
-                    "max": 3
-                  }
+                  "function": "minecraft:set_lore",
+                  "entity": "this",
+                  "lore": [
+                    {
+                      "text": "Right Click to use it",
+                      "color": "minecraft:dark_purple",
+                      "italic": false
+                    }
+                  ],
+                  "replace": true
                 }
               ]
             }

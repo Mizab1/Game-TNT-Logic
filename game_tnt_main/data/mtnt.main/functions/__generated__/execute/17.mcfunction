@@ -1,5 +1,5 @@
 #built using mc-build (https://github.com/mc-build/mc-build)
 
-summon armor_stand ~ ~ ~ {NoGravity:1b,Invisible:1b,Tags:["tnt.poppy_mommy","tnt.as"],ArmorItems:[{},{},{},{id:"minecraft:endermite_spawn_egg",Count:1b,tag:{CustomModelData:110015}}]}
-setblock ~ ~ ~ tnt
-tp @s ~ ~-600 ~
+execute as @a[distance=..2] at @s run function mtnt.main:__generated__/execute/18
+particle flash ~ ~1 ~ 0.1 0.1 0.1 1 10
+function animated_java:fnaf_freddy/remove/this

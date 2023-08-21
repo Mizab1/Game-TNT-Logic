@@ -13,6 +13,13 @@ function load{
 
     scoreboard objectives add rc_clicked minecraft.used:minecraft.carrot_on_a_stick
 
+    scoreboard objectives add pos_x1 dummy
+    scoreboard objectives add pos_y1 dummy
+    scoreboard objectives add pos_z1 dummy
+
+    scoreboard objectives add pos_x2 dummy
+    scoreboard objectives add pos_y2 dummy
+    scoreboard objectives add pos_z2 dummy
 
     gamerule universalAnger true  
     gamerule showDeathMessages false
@@ -21,22 +28,35 @@ function load{
     gamerule doDaylightCycle false
 }
 clock 30t{
-    execute(if score acid_rain private matches 1){
-        execute as @a[tag=!master] at @s if blocks ~ ~ ~ ~ ~30 ~ ~ 200 ~ masked run{
-            effect give @s instant_damage 1 0 true
-        }
-        execute as @e[type=#minecraft:all_living, type=!player] run{
-            effect give @s instant_damage 1 0 true
-        } 
-        execute as @e[type=#minecraft:ded_mobs] run{
-            effect give @s instant_health 1 0 true
-        } 
-    }
     # storm TNT
     execute at @e[type=item_display, tag=storm] as @a[distance=15..] run{
         effect give @s[distance=10..] instant_damage 1 0 true
     }
 }
+clock 10t {
+    # Dino particle
+    execute as @e[type=#models_logic:aj_mobs,tag=rainbow_cyan,tag=aj_mob] at @s run{
+        particle block dirt ^ ^0.2 ^-0.6 0.3 0 0.3 0 5
+    }
+
+    # Bowser particle
+    execute as @e[type=#models_logic:aj_mobs,tag=bowser,tag=aj_mob] at @s run{
+        particle flame ^ ^0.2 ^-0.6 1 0 1 0 40
+    }
+
+    #cannon
+    execute as @e[type=#models_logic:aj_mobs,tag=bowser,tag=aj_mob] at @s run{
+        tp @s ~ ~ ~ facing entity @a[distance=..9, limit=1, sort=nearest]
+    }
+}
+
+function load_poke_mob{
+    tp @e[type=#aestd1:mobs, tag=catched, limit=1] ~ ~ ~
+    particle poof ~ ~ ~ 1 1 1 0.5 20
+    playsound minecraft:item.trident.throw master @a ~ ~ ~ 0.5 1.5
+    kill @s
+}
+
 function tick{
     effect give @a[tag=!in_darkness] night_vision 100 0 true
 
@@ -73,13 +93,69 @@ function tick{
     }
 
     #pokeball
-    execute as @e[type=snowball] at @s if data entity @s Item.tag.pokeball if entity @e[type=#minecraft:passive, distance=..3] run{
-        effect give @e[type=#minecraft:passive, distance=..3] invisibility 5 0 true
-        particle poof ~ ~ ~ 1 1 1 0.5 1000
-        playsound minecraft:block.lava.extinguish master @a ~ ~ ~ 1 1.8
-        summon item ~ ~ ~ {Item:{id:"minecraft:heart_of_the_sea",Count:1b,tag:{display:{Name:'{"text":"Catched Pokemon","color":"gold","italic":false}'},Enchantments:[{}]}}}
+    execute as @e[type=snowball] at @s run{
+        block{
+            name test
+        
+        # Store
+        execute if data entity @s Item.tag.pokeball if entity @e[type=#aestd1:mobs, distance=..3] run{
+            execute as @e[type=#aestd1:mobs, distance=..3, limit=1] at @s run{
+                tp @s 76 -9 -218
+                data merge entity @s {PersistenceRequired:1b}
+                tag @s add catched
+            }
+            particle poof ~ ~ ~ 1 1 1 0.5 1000
+            playsound minecraft:block.lava.extinguish master @a ~ ~ ~ 1 1.8
+            summon item ~ ~ ~ {Item:{id:"minecraft:snowball",Count:1b,tag:{display:{Name:'{"text":"Catched Pokemon","color":"gold","italic":false}'},loaded_pokeball:1b,Enchantments:[{}]}}}
+            kill @s
+        }
+
+        # Load
+        <%%
+            for(let i = -1; i <= 1; i++){
+                for(let j = -1; j <= 1; j++){
+                    for(let k = -1; k <= 1; k++){
+                        emit(`execute if data entity @s Item.tag.loaded_pokeball unless block ~${i} ~${j} ~${k} air run function mtnt.main:load_poke_mob`)
+                    }
+                }
+            }
+            emit(`tag @e[type=#aestd1:mobs, distance=..1] remove catched`)
+            // emit(`kill @s`)
+        %%>
+        }
+    }
+
+    # Explosive Plushes
+    execute as @e[type=armor_stand, tag=huggy_wuggy_plushes] at @s if entity @a[distance=..2] run{
+        summon creeper ~ ~1.3 ~ {Fuse:0, ExplosionRadius: -2b}
         kill @s
     }
+
+    # FNAF Jumpscare
+    execute as @e[type=#animated_java:root,tag=aj.fnaf_bonnie.root] at @s if entity @a[distance=..2] run{
+        execute as @a[distance=..2] at @s run{
+            playsound minecraft:sfx.fnaf_scream master @s
+            effect give @s poison 4 0 true
+            effect give @s blindness 4 0 true
+        }
+        particle flash ~ ~1 ~ 0.1 0.1 0.1 1 10
+        function animated_java:fnaf_bonnie/remove/this
+    }
+    execute as @e[type=#animated_java:root,tag=aj.fnaf_freddy.root] at @s if entity @a[distance=..2] run{
+        execute as @a[distance=..2] at @s run{
+            playsound minecraft:sfx.fnaf_scream master @s
+            effect give @s poison 4 0 true
+            effect give @s blindness 4 0 true
+        }
+        particle flash ~ ~1 ~ 0.1 0.1 0.1 1 10
+        function animated_java:fnaf_freddy/remove/this
+    }
+
+    # Fireball particles
+    execute at @e[type=fireball] run{
+        particle flame ~ ~ ~ 0.3 0.3 0.3 0 10
+    }
+
 
     # setblock the custom TNT
     execute as @e[type=endermite, tag=tnt.endermite] at @s run{
@@ -265,32 +341,29 @@ function tick{
                 execute if score @s fuse_time matches 1 run{
                     kill @e[type=tnt, distance=..0.5]
                     summon creeper ~ ~0.8 ~ {Fuse:0, ExplosionRadius: 7b}
-                    
+
                     <%%
-                        let plushies = {
-                            "villager1": 111003, 
-                            "villager2": 111004, 
-                            "villager3": 111005, 
-                            "bee": 111006,
-                            "snow_golem": 111007
-                        }
-                        function getRandomNumberExcludingRange(min, max, excludeMin, excludeMax) {
-                            let randomNum;
-                            do {
-                                randomNum = Math.floor(Math.random() * (max - min + 1)) + min;
-                            } while (randomNum >= excludeMin && randomNum <= excludeMax);
-                            return randomNum;
-                        }
+                        let plushies_skull = [
+                            `tag:{SkullOwner:{Id:[I;-353789820,915230000,-2027186729,650451379],Properties:{textures:[{Value:"eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZDNlZGNmNjFhZDVkYTdmMGYxMzVmNzZlNDE1NWVjYTEyMWI3ZmRlMTlkM2Q4NTM3OTVkMDIwM2ZmMDE5MWM0OCJ9fX0="}]}}}`,
+                            `tag:{SkullOwner:{Id:[I;260735357,-674607628,-2107633346,-315053364],Properties:{textures:[{Value:"eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvN2QwY2M0NzZlYzlmMjk3ZWViMWE1ZTcyN2ZhOTFlZWViNGQ5YTBmZTVlMTNkYTQxN2FiZjk4NjBmZTMzMzRlYSJ9fX0="}]}}}`,
+                            `tag:{SkullOwner:{Id:[I;-980138224,1428637608,-1855436325,-593222700],Properties:{textures:[{Value:"eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZDVmNWJmODUxMGZmY2QzYTVlOWQ3ODI1YjY0MzMzYTEyMWQ1NjFmZTJjZGQ3NjdjN2UxOGI4Y2M1MjFiNiJ9fX0="}]}}}`,
+                            `tag:{SkullOwner:{Id:[I;-2026561938,1394166458,-1936164067,-2085803682],Properties:{textures:[{Value:"eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYTQ2MjY0NWVmMTdkMTNlNTA1MDUzNmFjYWI4ZmUxZWRjOTA4NDgwMzljYTg4NzE2YWRmNTM4M2M4MDgzZDhiMyJ9fX0="}]}}}`,
+                            `tag:{SkullOwner:{Id:[I;1410950043,833046232,-1775155104,-1080730030],Properties:{textures:[{Value:"eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZDhmNTlhMTUzMzRjNGU0OGQ0N2RhOWVjZGY2MThmZDVkNjU2MDgwYzRiNmRiNzQ0MGU2N2M4ZGU5MDU4ZjI3NSJ9fX0="}]}}}`
+                        ]
                         function randomNumber(min, max) {
                             return (Math.random() * (max - min) + min).toFixed(3);
                         }
-                        for(let i = 0; i <= 6; i++){
-                            for(let key in plushies){
-                                emit(`summon item_display ~${getRandomNumberExcludingRange(-15, 15, -5, 5)} ~0.5 ~${getRandomNumberExcludingRange(-15, 15, -5, 5)} {NoGravity:0b, item_display:"fixed",Rotation:[${randomNumber(-180, 180)}F,0F],item:{id:"minecraft:wooden_hoe",Count:1b,tag:{CustomModelData:${plushies[key]}}}}`)
-                            } 
+                        for(let i = 0; i <= 3; i++){
+                            plushies_skull.forEach(element => {
+                                emit(`summon minecraft:armor_stand ~ ~ ~ {Tags:["huggy_wuggy_plushes"],Rotation:[${randomNumber(-180, 180)}F,0F],NoGravity:1b,Invisible:1b,NoBasePlate:1b,ArmorItems:[{},{},{},{id:"minecraft:player_head",Count:1b, ${element}}]}`)
+                            });
                         }
                     %%>
-                    
+                    spreadplayers ~ ~ 3 15 false @e[type=minecraft:armor_stand, tag=huggy_wuggy_plushes]
+                    execute as @e[type=armor_stand, tag=huggy_wuggy_plushes] at @s run{
+                        tp @s ~ ~-1.3 ~
+                    }
+
                     # kill @e[type=armor_stand,tag=tnt.poppy_plushies,distance=..4]
                     tellraw @a {"text":"PLUSHIES!", "color":"gold"}
                     kill @s
@@ -629,19 +702,21 @@ function tick{
                     playsound entity.generic.explode master @a ~ ~ ~
                     
                     <%%
-                        for (let i = 0; i < 25; i++) {
-                            emit(`summon cow ~ ~ ~ {Motion:[${Math.random().toFixed(1)},${Math.random().toFixed(1)},${Math.random().toFixed(1)}], Tags:["roblox_cow"],CustomName:'{"text":"Roblox Cow","color":"gold","italic":false}'}`)
-                            emit(`summon pig ~ ~ ~ {Motion:[${Math.random().toFixed(1)},${Math.random().toFixed(1)},${Math.random().toFixed(1)}], Tags:["roblox_cow"],CustomName:'{"text":"Roblox Pig","color":"gold","italic":false}'}`)
-                            emit(`summon villager ~ ~ ~ {Motion:[${Math.random().toFixed(1)},${Math.random().toFixed(1)},${Math.random().toFixed(1)}], Tags:["roblox_villager"],CustomName:'{"text":"Roblox Villager","color":"gold"}',VillagerData:{level:99,profession:"minecraft:butcher"}}`)
+                        function randomNumber(min, max) {
+                            return (Math.random() * (max - min) + min).toFixed(3);
+                        }
+
+                        for (let i = 0; i < 2; i++) {
+                            emit(`summon fox ~ ~ ~ {Motion:[${Math.random().toFixed(1)},${Math.random().toFixed(1)},${Math.random().toFixed(1)}], Tags:["roblox_fox"]}`)
+                            emit(`summon cow ~ ~ ~ {Motion:[${Math.random().toFixed(1)},${Math.random().toFixed(1)},${Math.random().toFixed(1)}], Tags:["roblox_cow"], CustomName:'{"text":"Cow"}'}`)
+                            emit(`execute positioned ~${randomNumber(-15, 15)} ~${randomNumber(-15, 15)} ~${randomNumber(-15, 15)} run function models_logic:summon/elephant`)
+                            emit(`execute positioned ~${randomNumber(-15, 15)} ~${randomNumber(-15, 15)} ~${randomNumber(-15, 15)} run function models_logic:summon/penguin`)
+                            emit(`execute positioned ~${randomNumber(-15, 15)} ~${randomNumber(-15, 15)} ~${randomNumber(-15, 15)} run function models_logic:summon/deer`)
                             
                         }
 
                         // replace block
-                        for (let x = 0; x <= 50; x++) {
-                            for (let z = 0; z <= 50; z++) {
-                                emit(`execute positioned ~${x - 25} ~-1 ~${z - 25} run fill ~ ~ ~ ~ ~ ~ yellow_concrete replace #mtnt.main:all_but_air`)
-                            }
-                        }
+                        emit(`execute positioned ~-25 ~-1 ~-25 run fill ~ ~ ~ ~50 ~ ~50 yellow_concrete replace #mtnt.main:all_but_air`)
                     %%>
                     
                     # kill @e[type=armor_stand,tag=tnt.roblox_animal,distance=..4]
@@ -1238,14 +1313,7 @@ function shader_off_creeper{
         tag @a[tag=on_shader_undo] remove on_shader_undo
     }
 }
-# function tp_mob{
-#     scoreboard players set pokeball_started private 1
-#     execute(if score pokeball_started private matches 1..){
-#         execute as @e[type=#minecraft:passive, limit=1, sort=nearest] run{
-#             tag @s add target_mob
-#         }
-#     }
-# }
+
 function kill_models{
     kill @e[type=#models_logic:aj_mobs,tag=aj_mob]
     execute as @e[type=#animated_java:root,tag=aj.crewmate_aqua.root] run function animated_java:crewmate_aqua/remove/this
@@ -1263,14 +1331,6 @@ function kill_models{
     execute as @e[type=#animated_java:root,tag=aj.fnaf_bonnie.root] run function animated_java:fnaf_bonnie/remove/this
     execute as @e[type=#animated_java:root,tag=aj.fnaf_freddy.root] run function animated_java:fnaf_freddy/remove/this
 }
-
-# function amongus_kill_animation{
-#     summon armor_stand ~ ~ ~ {Invisible:1b,Tags:["animation_aS"],ArmorItems:[{},{},{},{id:"minecraft:wooden_hoe",Count:1b,tag:{CustomModelData:100001}}]}
-#     execute as @a[limit=1] at @s run{
-#         tag @s add viewing_animation
-#         effect give @s slowness 20 100 true
-#     }
-# }
 
 function death_anim{
     sequence{
@@ -1291,4 +1351,33 @@ function death_anim{
     }
 }
 
-# /summon minecraft:armor_stand ~ ~1.3 ~ {NoGravity:1b,Invisible:1b,NoBasePlate:1b,ArmorItems:[{},{},{},{id:"minecraft:player_head",Count:1b,tag:{SkullOwner:{Id:[I;-353789820,915230000,-2027186729,650451379],Properties:{textures:[{Value:"eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZDNlZGNmNjFhZDVkYTdmMGYxMzVmNzZlNDE1NWVjYTEyMWI3ZmRlMTlkM2Q4NTM3OTVkMDIwM2ZmMDE5MWM0OCJ9fX0="}]}}}}]}
+# Bowser Shhot Logic
+function bowser_shooting{
+    # cannon firing
+    execute as @e[type=#models_logic:aj_mobs,tag=bowser,tag=aj_mob] at @s anchored eyes positioned ^ ^ ^1 if entity @a[distance=..9] run{
+        summon fireball ~ ~1 ~ {Tags:["bowser_fireball"]}
+        scoreboard players set @s fireattacktime 60
+        particle cloud ~ ~1 ~ 0.5 0.5 0.5 0.1 40 force
+    }
+    execute as @e[type=fireball, tag=bowser_fireball, tag=!tag_added] at @s rotated as @e[type=#models_logic:aj_mobs, tag=bowser,tag=aj_mob, limit=1, sort=nearest] run{
+        execute store result score @s pos_x1 run data get entity @s Pos[0] 1000
+        execute store result score @s pos_y1 run data get entity @s Pos[1] 1000
+        execute store result score @s pos_z1 run data get entity @s Pos[2] 1000
+
+        tp @s ^ ^-0.04 ^0.1
+
+        execute store result score @s pos_x2 run data get entity @s Pos[0] 1000
+        execute store result score @s pos_y2 run data get entity @s Pos[1] 1000
+        execute store result score @s pos_z2 run data get entity @s Pos[2] 1000
+
+        scoreboard players operation @s pos_x2 -= @s pos_x1
+        scoreboard players operation @s pos_y2 -= @s pos_y1
+        scoreboard players operation @s pos_z2 -= @s pos_z1 
+
+        execute store result entity @s power[0] double 0.003 run scoreboard players get @s pos_x2
+        execute store result entity @s power[1] double 0.003 run scoreboard players get @s pos_y2
+        execute store result entity @s power[2] double 0.003 run scoreboard players get @s pos_z2 
+
+        tag @s add tag_added
+    }
+}

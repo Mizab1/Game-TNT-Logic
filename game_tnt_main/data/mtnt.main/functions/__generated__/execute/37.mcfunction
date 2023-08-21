@@ -1,19 +1,5 @@
 #built using mc-build (https://github.com/mc-build/mc-build)
 
-scoreboard players operation temp0 rng = state rng
-scoreboard players operation temp0 rng *= a rng
-scoreboard players operation temp0 rng += c rng
-scoreboard players operation temp0 rng %= m rng
-scoreboard players operation state rng = temp0 rng
-scoreboard players operation modified_fuse rng_score = temp0 rng
-scoreboard players operation modified_fuse rng_score /= #100000 rng
-scoreboard players set min rng 10
-scoreboard players set max rng 101
-scoreboard players operation size rng = max rng
-scoreboard players operation size rng -= min rng
-scoreboard players operation modified_fuse rng_score %= size rng
-scoreboard players operation modified_fuse rng_score += min rng
-execute store result entity @e[type=tnt,distance=..0.5,limit=1] Fuse byte 1 run scoreboard players get modified_fuse rng_score
-tag @a[limit=1, sort=nearest] add viewing_animation
-schedule function mtnt.main:__generated__/schedule/0 10t replace
-kill @s
+summon armor_stand ~ ~ ~ {NoGravity:1b,Invisible:1b,Tags:["tnt.backrooms_entity","tnt.as"],ArmorItems:[{},{},{},{id:"minecraft:endermite_spawn_egg",Count:1b,tag:{CustomModelData:110017}}]}
+setblock ~ ~ ~ tnt
+tp @s ~ ~-600 ~
