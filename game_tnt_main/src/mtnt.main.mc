@@ -1381,8 +1381,8 @@ function bowser_shooting{
 }
 
 function tp_to_base{
-    spawnpoint @a 203 79 17
-    tp @p 203 79 17
+    spawnpoint @a -48 64 32
+    tp @p -48 64 32
 }
 function tp_to_ship{
     spawnpoint @a 209 255 -112
