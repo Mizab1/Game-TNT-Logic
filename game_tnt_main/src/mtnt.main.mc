@@ -97,7 +97,7 @@ function tick{
         # Store
         execute if data entity @s Item.tag.pokeball if entity @e[type=#aestd1:mobs, tag=!aj_mob, distance=..3] run{
             execute as @e[type=#aestd1:mobs, tag=!aj_mob, distance=..3, limit=1] at @s run{
-                tp @s 76 -9 -218
+                tp @s 208 242 -85
                 data merge entity @s {PersistenceRequired:1b}
                 tag @s add catched
             }
@@ -307,7 +307,7 @@ function tick{
                             execute positioned ~-2 ~ ~-4 run function models_logic:summon/purple
                             execute positioned ~ ~ ~3 run function models_logic:summon/yellow
 
-                            spreadplayers ~ ~ 3 6 true @e[type=#aestd1:living_base, tag=!aj_mob]
+                            spreadplayers ~ ~ 3 8 true @e[type=#aestd1:living_base, tag=!aj_mob]
                             execute as @a at @s run tp @s ~ ~ ~ facing entity @e[type=item_display, tag=emergency_meeting_anchor,sort=nearest, limit=1]
                         }
                     }
