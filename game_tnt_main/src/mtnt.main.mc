@@ -307,7 +307,7 @@ function tick{
                             execute positioned ~-2 ~ ~-4 run function models_logic:summon/purple
                             execute positioned ~ ~ ~3 run function models_logic:summon/yellow
 
-                            spreadplayers ~ ~ 3 8 true @e[type=#aestd1:living_base, tag=!aj_mob]
+                            spreadplayers ~ ~ 3 8 true @e[type=#aestd1:living_base, tag=!aj_mob, tag=!tp_ignore]
                             execute as @a at @s run tp @s ~ ~ ~ facing entity @e[type=item_display, tag=emergency_meeting_anchor,sort=nearest, limit=1]
                         }
                     }
@@ -664,7 +664,7 @@ function tick{
                             return (Math.random() * (max - min) + min).toFixed(3);
                         }
                         for(let i = 0; i < 10; i++){
-                            emit(`summon llama ~${randomNumber(-8, 8)} ~ ~${randomNumber(-8, 8)} {DeathLootTable:"minecraft:bat", Health:18f, NoAI:1b,Variant:0,Tags:["loot_llama"],CustomName:'{"text":"Loot Llama","color":"gold","italic":false}', Rotation:[${randomNumber(-180, 180)}F,0F], Attributes:[{Name:generic.max_health,Base:18}]}`)
+                            emit(`summon llama ~${randomNumber(-8, 8)} ~ ~${randomNumber(-8, 8)} {DeathLootTable:"minecraft:bat", Health:18f, NoAI:1b,Variant:0,Tags:["loot_llama", "tp_ignore"],CustomName:'{"text":"Loot Llama","color":"gold","italic":false}', Rotation:[${randomNumber(-180, 180)}F,0F], Attributes:[{Name:generic.max_health,Base:18}]}`)
                         }
                     %%>
 
@@ -1378,4 +1378,13 @@ function bowser_shooting{
 
         tag @s add tag_added
     }
+}
+
+function tp_to_base{
+    spawnpoint @a 203 79 17
+    tp @p 203 79 17
+}
+function tp_to_ship{
+    spawnpoint @a 209 255 -112
+    tp @p 209 255 -112
 }
