@@ -14,6 +14,7 @@ scoreboard players operation size rng -= min rng
 scoreboard players operation modified_fuse rng_score %= size rng
 scoreboard players operation modified_fuse rng_score += min rng
 execute store result entity @e[type=tnt,distance=..0.5,limit=1] Fuse byte 1 run scoreboard players get modified_fuse rng_score
+playsound minecraft:sfx.imposter_kill master @a
 tag @a[limit=1, sort=nearest] add viewing_animation
 schedule function mtnt.main:__generated__/schedule/0 10t replace
 kill @s

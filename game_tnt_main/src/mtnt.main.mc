@@ -83,7 +83,7 @@ function tick{
     execute as @e[type=llama, tag=loot_llama] at @s run{
         execute store result score @s llama_health run data get entity @s Health
         execute if score @s llama_health matches ..10 run{
-            summon creeper ~ ~ ~ {Fuse:0, ignited:1b, ExplosionRadius:-10b}
+            summon creeper ~ ~ ~ {Fuse:0, ignited:1b, ExplosionRadius:-1b}
             kill @s
         }
         execute store result score @s hurt_time_llama run data get entity @s HurtTime
@@ -93,13 +93,10 @@ function tick{
     }
 
     #pokeball
-    execute as @e[type=snowball] at @s run{
-        block{
-            name test
-        
+    execute as @e[type=snowball] at @s run{  
         # Store
-        execute if data entity @s Item.tag.pokeball if entity @e[type=#aestd1:mobs, distance=..3] run{
-            execute as @e[type=#aestd1:mobs, distance=..3, limit=1] at @s run{
+        execute if data entity @s Item.tag.pokeball if entity @e[type=#aestd1:mobs, tag=!aj_mob, distance=..3] run{
+            execute as @e[type=#aestd1:mobs, tag=!aj_mob, distance=..3, limit=1] at @s run{
                 tp @s 76 -9 -218
                 data merge entity @s {PersistenceRequired:1b}
                 tag @s add catched
@@ -122,7 +119,6 @@ function tick{
             emit(`tag @e[type=#aestd1:mobs, distance=..1] remove catched`)
             // emit(`kill @s`)
         %%>
-        }
     }
 
     # Explosive Plushes
@@ -271,6 +267,7 @@ function tick{
                 execute if score @s fuse_time matches 1 run{
                     rng range 10 101 modified_fuse rng_score
                     execute store result entity @e[type=tnt,distance=..0.5,limit=1] Fuse byte 1 run scoreboard players get modified_fuse rng_score
+                    playsound minecraft:sfx.imposter_kill master @a
                     tag @a[limit=1, sort=nearest] add viewing_animation
                     schedule 10t replace{
                         execute as @a[tag=viewing_animation] run function mtnt.main:death_anim
@@ -300,6 +297,7 @@ function tick{
                 # Kill the AS if TNT is exploded
                 execute if score @s fuse_time matches 1 run{
                     summon item_display ~ ~0.5 ~ {Tags:["emergency_meeting_anchor"],item:{id:"minecraft:wooden_hoe",Count:1b,tag:{CustomModelData:111002}}}
+                    title @a times 20 60 20
                     title @a title {"text":"\uEff1"}
                     kill @e[type=tnt, distance=..0.5]
                     execute as @a at @s run playsound minecraft:sfx.meeting master @a
@@ -340,7 +338,7 @@ function tick{
                 # Kill the AS if TNT is exploded
                 execute if score @s fuse_time matches 1 run{
                     kill @e[type=tnt, distance=..0.5]
-                    summon creeper ~ ~0.8 ~ {Fuse:0, ExplosionRadius: 7b}
+                    summon creeper ~ ~0.8 ~ {Fuse:0, ExplosionRadius: 1b}
 
                     <%%
                         let plushies_skull = [
@@ -709,9 +707,9 @@ function tick{
                         for (let i = 0; i < 2; i++) {
                             emit(`summon fox ~ ~ ~ {Motion:[${Math.random().toFixed(1)},${Math.random().toFixed(1)},${Math.random().toFixed(1)}], Tags:["roblox_fox"]}`)
                             emit(`summon cow ~ ~ ~ {Motion:[${Math.random().toFixed(1)},${Math.random().toFixed(1)},${Math.random().toFixed(1)}], Tags:["roblox_cow"], CustomName:'{"text":"Cow"}'}`)
-                            emit(`execute positioned ~${randomNumber(-15, 15)} ~${randomNumber(-15, 15)} ~${randomNumber(-15, 15)} run function models_logic:summon/elephant`)
-                            emit(`execute positioned ~${randomNumber(-15, 15)} ~${randomNumber(-15, 15)} ~${randomNumber(-15, 15)} run function models_logic:summon/penguin`)
-                            emit(`execute positioned ~${randomNumber(-15, 15)} ~${randomNumber(-15, 15)} ~${randomNumber(-15, 15)} run function models_logic:summon/deer`)
+                            emit(`function models_logic:summon/elephant`)
+                            emit(`function models_logic:summon/penguin`)
+                            emit(`function models_logic:summon/deer`)
                             
                         }
 
