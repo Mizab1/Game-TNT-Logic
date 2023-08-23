@@ -3,13 +3,13 @@
 kill @e[type=tnt, distance=..0.5]
 particle minecraft:explosion ~ ~ ~ 2 2 2 1 100
 playsound entity.generic.explode master @a ~ ~ ~
-summon fox ~ ~ ~ {Motion:[0.4,0.3,0.6], Tags:["roblox_fox"]}
-summon cow ~ ~ ~ {Motion:[0.2,0.5,0.1], Tags:["roblox_cow"], CustomName:'{"text":"Cow"}'}
+summon fox ~ ~ ~ {Motion:[0.1,0.0,0.7], Tags:["roblox_fox"]}
+summon cow ~ ~ ~ {Motion:[1.0,0.9,0.5], Tags:["roblox_cow"], CustomName:'{"text":"Cow"}'}
 function models_logic:summon/elephant
 function models_logic:summon/penguin
 function models_logic:summon/deer
-summon fox ~ ~ ~ {Motion:[0.8,0.9,0.5], Tags:["roblox_fox"]}
-summon cow ~ ~ ~ {Motion:[0.0,0.6,0.5], Tags:["roblox_cow"], CustomName:'{"text":"Cow"}'}
+summon fox ~ ~ ~ {Motion:[1.0,0.8,0.0], Tags:["roblox_fox"]}
+summon cow ~ ~ ~ {Motion:[0.1,0.7,0.9], Tags:["roblox_cow"], CustomName:'{"text":"Cow"}'}
 function models_logic:summon/elephant
 function models_logic:summon/penguin
 function models_logic:summon/deer

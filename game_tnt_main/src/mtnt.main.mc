@@ -45,14 +45,14 @@ clock 30t{
 clock 20t{
     # Missile timer
     execute as @e[type=armor_stand,tag=missile] at @s run{
-        execute if score @s missile_timer matches 12.. run{
+        execute if score @s missile_timer matches 7.. run{
             summon creeper ~ ~ ~ {ExplosionRadius:-1b,Fuse:1,ignited:1b,Tags:["lasercreeper"],ActiveEffects:[{Id:14b,Amplifier:1b,Duration:4000,ShowParticles:0b}]}
             kill @s
             schedule 2t append{
                 kill @e[type=area_effect_cloud]
             }
         }
-        execute unless score @s missile_timer matches 12.. run{
+        execute unless score @s missile_timer matches 7.. run{
             scoreboard players add @s missile_timer 1 
         }
     }

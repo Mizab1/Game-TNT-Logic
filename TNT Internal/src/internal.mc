@@ -7,7 +7,7 @@ clock 1s{
 }
 
 clock 8s{
-    execute if entity @e[type=#models_logic:aj_mobs,tag=rainbow_red,tag=aj_mob] run function internal:missiles
+    execute as @e[type=#models_logic:aj_mobs,tag=rainbow_red,tag=aj_mob] at @s if entity @a[distance=..30] run function internal:missiles
 }
 
 function tick{
@@ -51,7 +51,7 @@ function missiles{
             playsound minecraft:item.trident.throw master @a ~ ~ ~ 1 1.5 1
         } 
     }
-    execute as @e[type=#models_logic:aj_mobs, tag=rainbow_red] at @s run summon armor_stand ~ ~3 ~ {Rotation:[0f,-60f],NoGravity:1b,Invulnerable:1b,Invisible:1b,Tags:["missile"],Pose:{Head:[-20f,0f,1f]},ArmorItems:[{},{},{},{id:"minecraft:blue_dye",Count:1b}]}
+    summon armor_stand ~ ~3 ~ {Rotation:[0f,-60f],NoGravity:1b,Invulnerable:1b,Invisible:1b,Tags:["missile"],Pose:{Head:[-20f,0f,1f]},ArmorItems:[{},{},{},{id:"minecraft:blue_dye",Count:1b}]}
     execute as @e[type=armor_stand,tag=missile] at @e[tag=cp.lead] run tp @s ~ ~ ~ ~ -60
     schedule 35t append{
         execute as @e[type=#models_logic:aj_mobs, tag=rainbow_red] at @s run summon armor_stand ~ ~3 ~ {Rotation:[0f,-60f],NoGravity:1b,Invulnerable:1b,Invisible:1b,Tags:["missile"],Pose:{Head:[-20f,0f,1f]},ArmorItems:[{},{},{},{id:"minecraft:blue_dye",Count:1b}]}

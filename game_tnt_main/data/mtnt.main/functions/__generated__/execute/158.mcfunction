@@ -5,24 +5,24 @@ particle minecraft:explosion ~ ~ ~ 2 2 2 1 100
 playsound entity.generic.explode master @a ~ ~ ~
 particle minecraft:totem_of_undying ~ ~1 ~ 0.5 0.5 0.5 0.1 50
 execute as @e[type=#aestd1:mobs, tag=!aj_mob, distance=..15] at @s run function mtnt.main:__generated__/execute/159
-summon snowball ~ ~ ~ {Motion:[0.37,0.37,0.33]}
-summon snowball ~ ~ ~ {Motion:[0.46,0.48,0.14]}
-summon snowball ~ ~ ~ {Motion:[-0.56,0.46,0.20]}
-summon snowball ~ ~ ~ {Motion:[0.45,0.49,0.05]}
-summon snowball ~ ~ ~ {Motion:[-0.13,0.56,0.32]}
-summon snowball ~ ~ ~ {Motion:[0.22,0.51,-0.53]}
-summon snowball ~ ~ ~ {Motion:[-0.73,0.60,0.01]}
-summon snowball ~ ~ ~ {Motion:[-0.22,0.45,-0.54]}
-summon snowball ~ ~ ~ {Motion:[-0.74,0.54,-0.05]}
-summon snowball ~ ~ ~ {Motion:[-0.43,0.22,0.77]}
-summon snowball ~ ~ ~ {Motion:[0.59,0.59,-0.49]}
-summon snowball ~ ~ ~ {Motion:[0.26,0.26,0.76]}
-summon snowball ~ ~ ~ {Motion:[-0.38,0.48,0.42]}
-summon snowball ~ ~ ~ {Motion:[-0.37,0.37,-0.78]}
-summon snowball ~ ~ ~ {Motion:[-0.29,0.56,0.56]}
-summon snowball ~ ~ ~ {Motion:[-0.09,0.24,0.57]}
-summon snowball ~ ~ ~ {Motion:[-0.60,0.29,-0.09]}
-summon snowball ~ ~ ~ {Motion:[0.18,0.38,-0.29]}
-summon snowball ~ ~ ~ {Motion:[0.02,0.39,0.08]}
-summon snowball ~ ~ ~ {Motion:[-0.07,0.23,0.45]}
+summon snowball ~ ~ ~ {Motion:[0.16,0.48,0.71]}
+summon snowball ~ ~ ~ {Motion:[0.18,0.31,-0.07]}
+summon snowball ~ ~ ~ {Motion:[0.62,0.49,-0.32]}
+summon snowball ~ ~ ~ {Motion:[-0.12,0.34,-0.47]}
+summon snowball ~ ~ ~ {Motion:[0.50,0.47,0.54]}
+summon snowball ~ ~ ~ {Motion:[-0.19,0.35,-0.19]}
+summon snowball ~ ~ ~ {Motion:[0.76,0.35,0.17]}
+summon snowball ~ ~ ~ {Motion:[0.73,0.24,0.48]}
+summon snowball ~ ~ ~ {Motion:[-0.29,0.24,-0.08]}
+summon snowball ~ ~ ~ {Motion:[0.62,0.52,0.50]}
+summon snowball ~ ~ ~ {Motion:[0.72,0.29,0.41]}
+summon snowball ~ ~ ~ {Motion:[-0.23,0.31,-0.15]}
+summon snowball ~ ~ ~ {Motion:[-0.07,0.41,-0.71]}
+summon snowball ~ ~ ~ {Motion:[-0.67,0.24,-0.08]}
+summon snowball ~ ~ ~ {Motion:[-0.63,0.39,0.01]}
+summon snowball ~ ~ ~ {Motion:[0.76,0.59,0.25]}
+summon snowball ~ ~ ~ {Motion:[-0.52,0.47,-0.17]}
+summon snowball ~ ~ ~ {Motion:[0.13,0.49,-0.74]}
+summon snowball ~ ~ ~ {Motion:[0.44,0.49,-0.51]}
+summon snowball ~ ~ ~ {Motion:[0.60,0.37,-0.06]}
 kill @s
