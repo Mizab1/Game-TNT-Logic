@@ -387,7 +387,7 @@ function tick{
                         }
                         for(let i = 0; i <= 3; i++){
                             plushies_skull.forEach(element => {
-                                emit(`summon minecraft:armor_stand ~ ~ ~ {Tags:["huggy_wuggy_plushes"],Rotation:[${randomNumber(-180, 180)}F,0F],NoGravity:1b,Invisible:1b,NoBasePlate:1b,ArmorItems:[{},{},{},{id:"minecraft:player_head",Count:1b, ${element}}]}`)
+                                emit(`summon minecraft:armor_stand ~ ~ ~ {Tags:["huggy_wuggy_plushes", "tp_ignore"],Rotation:[${randomNumber(-180, 180)}F,0F],NoGravity:1b,Invisible:1b,NoBasePlate:1b,ArmorItems:[{},{},{},{id:"minecraft:player_head",Count:1b, ${element}}]}`)
                             });
                         }
                     %%>
@@ -1011,6 +1011,8 @@ function tick{
 
                     block{
                         name setup_backrooms_maze
+
+                        tellraw @a {"text":"Try to find the exit button to exit the Maze", "color": "gold"}
 
                         tp @a 748 171 -88
 
