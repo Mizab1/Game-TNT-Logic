@@ -1014,12 +1014,12 @@ function tick{
 
                         tellraw @a {"text":"Try to find the exit button to exit the Maze", "color": "gold"}
 
-                        tp @a 40 10 -45
+                        tp @a -40 31 -4
 
-                        execute positioned 56 10 -34 run function models_logic:summon/backdoor
-                        execute positioned 53 10 -11 run function models_logic:summon/backdoor
-                        execute positioned 78 10 -14 run function models_logic:summon/backdoor
-                        execute positioned 39 10 -21 run function models_logic:summon/backdoor
+                        execute positioned -22 31 16 run function models_logic:summon/backdoor
+                        execute positioned -40 31 20 run function models_logic:summon/backdoor
+                        execute positioned 2 31 2 run function models_logic:summon/backdoor
+                        execute positioned -12 31 9 run function models_logic:summon/backdoor
 
                         execute as @a at @s run{
                             playsound minecraft:ambient.cave master @s ~ ~ ~ 1 1.5
