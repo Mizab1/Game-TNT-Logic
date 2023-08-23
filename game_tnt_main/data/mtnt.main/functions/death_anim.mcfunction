@@ -1,6 +1,6 @@
 #built using mc-build (https://github.com/mc-build/mc-build)
 
-execute as @a[tag=viewing_animation] run function mtnt.main:__generated__/execute/181
+execute as @a[tag=viewing_animation] run function mtnt.main:__generated__/execute/182
 schedule function mtnt.main:__generated__/sequence/215 10t replace
 schedule function mtnt.main:__generated__/sequence/216 20t replace
 schedule function mtnt.main:__generated__/sequence/217 30t replace

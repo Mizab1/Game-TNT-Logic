@@ -4,16 +4,16 @@ kill @e[type=tnt, distance=..0.5]
 particle minecraft:explosion ~ ~ ~ 2 2 2 1 100
 playsound entity.generic.explode master @a ~ ~ ~
 summon marker ~ ~ ~ {Tags:["enderman_marker"]}
-summon enderman ~ ~ ~ {Motion:[0.83, 0.52, 1.00], Tags:["endermen"]}
-summon enderman ~ ~ ~ {Motion:[0.34, 0.61, 0.80], Tags:["endermen"]}
-summon enderman ~ ~ ~ {Motion:[0.59, 0.16, 0.00], Tags:["endermen"]}
-summon enderman ~ ~ ~ {Motion:[0.11, 0.18, 0.12], Tags:["endermen"]}
-summon enderman ~ ~ ~ {Motion:[0.64, 0.22, 0.47], Tags:["endermen"]}
-summon enderman ~ ~ ~ {Motion:[0.59, 0.96, 0.49], Tags:["endermen"]}
-summon enderman ~ ~ ~ {Motion:[0.08, 0.21, 0.60], Tags:["endermen"]}
-summon enderman ~ ~ ~ {Motion:[0.32, 0.82, 0.13], Tags:["endermen"]}
-summon enderman ~ ~ ~ {Motion:[0.23, 0.27, 0.66], Tags:["endermen"]}
-summon enderman ~ ~ ~ {Motion:[0.59, 0.75, 0.89], Tags:["endermen"]}
+summon enderman ~ ~ ~ {Motion:[0.20, 0.06, 0.96], Tags:["endermen"]}
+summon enderman ~ ~ ~ {Motion:[0.24, 0.43, 0.66], Tags:["endermen"]}
+summon enderman ~ ~ ~ {Motion:[0.48, 0.73, 0.25], Tags:["endermen"]}
+summon enderman ~ ~ ~ {Motion:[0.57, 0.20, 0.21], Tags:["endermen"]}
+summon enderman ~ ~ ~ {Motion:[0.91, 0.11, 0.14], Tags:["endermen"]}
+summon enderman ~ ~ ~ {Motion:[0.76, 0.08, 0.65], Tags:["endermen"]}
+summon enderman ~ ~ ~ {Motion:[0.49, 0.50, 0.98], Tags:["endermen"]}
+summon enderman ~ ~ ~ {Motion:[0.07, 0.49, 0.18], Tags:["endermen"]}
+summon enderman ~ ~ ~ {Motion:[0.48, 0.48, 0.01], Tags:["endermen"]}
+summon enderman ~ ~ ~ {Motion:[0.54, 0.29, 0.36], Tags:["endermen"]}
 playsound minecraft:entity.enderman.scream master @a ~ ~ ~ 1 0.8
 tellraw @a {"text":"Nausea Warning", "color":"red"}
 schedule function mtnt.main:__generated__/sequence/202 60t replace
