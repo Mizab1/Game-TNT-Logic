@@ -1,9 +1,8 @@
 #built using mc-build (https://github.com/mc-build/mc-build)
 
-kill @e[type=tnt, distance=..0.5]
-particle minecraft:explosion ~ ~ ~ 2 2 2 1 100
-playsound entity.generic.explode master @a ~ ~ ~
-playsound minecraft:entity.ender_dragon.shoot master @a ~ ~ ~ 1 0.5
-particle minecraft:campfire_signal_smoke ~ ~ ~ 1 1 1 0.2 500
-function models_logic:summon/rainbow_cyan
-kill @s
+tp @s 208 242 -85
+data merge entity @s {PersistenceRequired:1b}
+tag @s add catched
+particle poof ~ ~ ~ 1 1 1 0.5 100
+playsound minecraft:block.lava.extinguish master @a ~ ~ ~ 1 1.8
+summon item ~ ~ ~ {Item:{id:"minecraft:snowball",Count:1b,tag:{display:{Name:'{"text":"Catched Pokemon","color":"gold","italic":false}'},loaded_pokeball:1b,Enchantments:[{}]}}}

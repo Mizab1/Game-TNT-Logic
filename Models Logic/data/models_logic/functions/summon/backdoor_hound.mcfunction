@@ -1,0 +1,1 @@
+summon husk ~ ~ ~ {DeathLootTable:"minecraft:bat", Silent:1b,Health:25f,Tags:["new","aj_mob","backdoor_hound"],ActiveEffects:[{Id:14,Amplifier:1b,Duration:999999,ShowParticles:0b}],Attributes:[{Name:generic.max_health,Base:25},{Name:generic.movement_speed,Base:0.3},{Name:generic.attack_damage,Base:2}]}

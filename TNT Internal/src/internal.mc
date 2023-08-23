@@ -14,11 +14,20 @@ function tick{
     execute unless entity @e[type=armor_stand,tag=missile] run stopsound @a master item.trident.thunder
     execute as @e[type=armor_stand,tag=missile,tag=!lockon] at @s run tp @s ^ ^ ^0.25 ~ ~
     execute as @e[type=minecraft:armor_stand,tag=missile] at @s anchored eyes run particle minecraft:flame ^ ^ ^-2 0.05 0.05 0.05 0.01 30
-    execute as @e[type=armor_stand,tag=missile] at @s if entity @a[distance=..1] run{
-        summon creeper ~ ~ ~ {ExplosionRadius:-1b,Fuse:1,ignited:1b,Tags:["lasercreeper"],ActiveEffects:[{Id:14b,Amplifier:1b,Duration:4000,ShowParticles:0b}]}
-        kill @s
-        schedule 2t append{
-            kill @e[type=area_effect_cloud]
+    execute as @e[type=armor_stand,tag=missile] at @s run{
+        execute if entity @a[distance=..1] run{
+            summon creeper ~ ~ ~ {ExplosionRadius:-1b,Fuse:1,ignited:1b,Tags:["lasercreeper"],ActiveEffects:[{Id:14b,Amplifier:1b,Duration:4000,ShowParticles:0b}]}
+            kill @s
+            schedule 2t append{
+                kill @e[type=area_effect_cloud]
+            }
+        }
+        execute unless block ~ ~ ~ #aestd1:air run{
+            summon creeper ~ ~ ~ {ExplosionRadius:-1b,Fuse:1,ignited:1b,Tags:["lasercreeper"],ActiveEffects:[{Id:14b,Amplifier:1b,Duration:4000,ShowParticles:0b}]}
+            kill @s
+            schedule 2t append{
+                kill @e[type=area_effect_cloud]
+            }
         }
     } 
     execute as @e[type=minecraft:armor_stand,tag=missile] store result entity @s Pose.Head[0] float 0.001 run data get entity @s Rotation[1] 1000

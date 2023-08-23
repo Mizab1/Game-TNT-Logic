@@ -3,15 +3,7 @@
 kill @e[type=tnt, distance=..0.5]
 particle minecraft:explosion ~ ~ ~ 2 2 2 1 100
 playsound entity.generic.explode master @a ~ ~ ~
-summon llama ~-0.768 ~ ~0.636 {DeathLootTable:"minecraft:bat", Health:18f, NoAI:1b,Variant:0,Tags:["loot_llama", "tp_ignore"],CustomName:'{"text":"Loot Llama","color":"gold","italic":false}', Rotation:[150.500F,0F], Attributes:[{Name:generic.max_health,Base:18}]}
-summon llama ~4.184 ~ ~-3.244 {DeathLootTable:"minecraft:bat", Health:18f, NoAI:1b,Variant:0,Tags:["loot_llama", "tp_ignore"],CustomName:'{"text":"Loot Llama","color":"gold","italic":false}', Rotation:[12.512F,0F], Attributes:[{Name:generic.max_health,Base:18}]}
-summon llama ~-5.908 ~ ~-3.504 {DeathLootTable:"minecraft:bat", Health:18f, NoAI:1b,Variant:0,Tags:["loot_llama", "tp_ignore"],CustomName:'{"text":"Loot Llama","color":"gold","italic":false}', Rotation:[59.444F,0F], Attributes:[{Name:generic.max_health,Base:18}]}
-summon llama ~-5.239 ~ ~-7.685 {DeathLootTable:"minecraft:bat", Health:18f, NoAI:1b,Variant:0,Tags:["loot_llama", "tp_ignore"],CustomName:'{"text":"Loot Llama","color":"gold","italic":false}', Rotation:[58.170F,0F], Attributes:[{Name:generic.max_health,Base:18}]}
-summon llama ~-3.373 ~ ~-3.429 {DeathLootTable:"minecraft:bat", Health:18f, NoAI:1b,Variant:0,Tags:["loot_llama", "tp_ignore"],CustomName:'{"text":"Loot Llama","color":"gold","italic":false}', Rotation:[-23.525F,0F], Attributes:[{Name:generic.max_health,Base:18}]}
-summon llama ~4.602 ~ ~4.726 {DeathLootTable:"minecraft:bat", Health:18f, NoAI:1b,Variant:0,Tags:["loot_llama", "tp_ignore"],CustomName:'{"text":"Loot Llama","color":"gold","italic":false}', Rotation:[-121.867F,0F], Attributes:[{Name:generic.max_health,Base:18}]}
-summon llama ~-5.343 ~ ~2.877 {DeathLootTable:"minecraft:bat", Health:18f, NoAI:1b,Variant:0,Tags:["loot_llama", "tp_ignore"],CustomName:'{"text":"Loot Llama","color":"gold","italic":false}', Rotation:[-28.501F,0F], Attributes:[{Name:generic.max_health,Base:18}]}
-summon llama ~-7.108 ~ ~1.063 {DeathLootTable:"minecraft:bat", Health:18f, NoAI:1b,Variant:0,Tags:["loot_llama", "tp_ignore"],CustomName:'{"text":"Loot Llama","color":"gold","italic":false}', Rotation:[-142.156F,0F], Attributes:[{Name:generic.max_health,Base:18}]}
-summon llama ~-1.773 ~ ~-5.137 {DeathLootTable:"minecraft:bat", Health:18f, NoAI:1b,Variant:0,Tags:["loot_llama", "tp_ignore"],CustomName:'{"text":"Loot Llama","color":"gold","italic":false}', Rotation:[153.836F,0F], Attributes:[{Name:generic.max_health,Base:18}]}
-summon llama ~4.979 ~ ~6.617 {DeathLootTable:"minecraft:bat", Health:18f, NoAI:1b,Variant:0,Tags:["loot_llama", "tp_ignore"],CustomName:'{"text":"Loot Llama","color":"gold","italic":false}', Rotation:[-137.387F,0F], Attributes:[{Name:generic.max_health,Base:18}]}
-tellraw @a {"text":"Loot llama spawned", "color":"gold"}
+summon item_display ~ ~ ~ {Tags:["storm"], view_range:100f, item_display:"ground",transformation:{left_rotation:[0f,0f,0f,1f],right_rotation:[0f,0f,0f,1f],translation:[0f,0f,0f],scale:[20f,20f,20f]},item:{id:"minecraft:wooden_hoe",Count:1b,tag:{CustomModelData:111001}}}
+tellraw @a {"text":"Storm is nearby the TNT! Get inside the circle", "color":"red"}
 kill @s
+schedule function mtnt.main:__generated__/schedule/3 20s replace

@@ -27,3 +27,23 @@ BugFixes:
   ✔ Switch Spawnpoint button off
   ✔ Destroy Wall
   ✔ Add spawnpoints
+
+Tests:
+  ✔ pokeballs still working like before, is supposed to catch mobs when the tnt explodes
+  ✔ pikachu drop pig meat when summon ...
+  ☐ is missing the bedrock under the city
+  ✔ can the mutant creeper be electrified like charged creeper?
+  ✔ i used the star item from mario and i didn't listened the star song while I'm undereffect, is supposed that you have to add the caracteristic sounds to the items like the mushroom sound and the star sound, at least for 5 seconds
+  ✔ awesome work with bowser, is just missing the sounds
+  ✔ in the texturepack, the fire is invisible idk why
+  ✔ tp to the ship button doesn't works
+  ✔ what does "kill models" button?
+  ✔ change the texture of the plushies tnt
+  ✔ you should add a range of working to the missiles bc I'm into backrooms and missiles still shooting me x) and also a timer
+  ✔ how I pass backrooms tnt?
+  ✔ meeting tnt is broken it tp to empty space, it should to tp to the ship at least (Testing required with multiple mobs)
+  ✔ i don't receive damage when I'm out of the circle
+  ✔ Add more backroom entities
+  ✔ you could make a jumpscare of the animatronics face with the elder guardian effect, bc looks empty
+
+  Make sure to check the pokeball store location in the new map

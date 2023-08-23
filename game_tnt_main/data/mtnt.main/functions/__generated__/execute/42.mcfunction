@@ -1,23 +1,5 @@
 #built using mc-build (https://github.com/mc-build/mc-build)
 
-execute if entity @s[tag=tnt.amongus_imposter] run function mtnt.main:__generated__/execute/43
-execute if entity @s[tag=tnt.amongus_emergency] run function mtnt.main:__generated__/execute/48
-execute if entity @s[tag=tnt.poppy_plushies] run function mtnt.main:__generated__/execute/58
-execute if entity @s[tag=tnt.poppy_huggy] run function mtnt.main:__generated__/execute/63
-execute if entity @s[tag=tnt.poppy_mommy] run function mtnt.main:__generated__/execute/67
-execute if entity @s[tag=tnt.fnaf_animatronics] run function mtnt.main:__generated__/execute/75
-execute if entity @s[tag=tnt.fnaf_darkness] run function mtnt.main:__generated__/execute/81
-execute if entity @s[tag=tnt.fortnite_storm] run function mtnt.main:__generated__/execute/88
-execute if entity @s[tag=tnt.fortnite_llama] run function mtnt.main:__generated__/execute/92
-execute if entity @s[tag=tnt.roblox_animal] run function mtnt.main:__generated__/execute/96
-execute if entity @s[tag=tnt.roblox_noob] run function mtnt.main:__generated__/execute/100
-execute if entity @s[tag=tnt.minecraft_creeper] run function mtnt.main:__generated__/execute/104
-execute if entity @s[tag=tnt.minecraft_endermen] run function mtnt.main:__generated__/execute/108
-execute if entity @s[tag=tnt.mario_mystery] run function mtnt.main:__generated__/execute/124
-execute if entity @s[tag=tnt.mario_bowser] run function mtnt.main:__generated__/execute/128
-execute if entity @s[tag=tnt.backrooms_maze] run function mtnt.main:__generated__/execute/133
-execute if entity @s[tag=tnt.backrooms_entity] run function mtnt.main:__generated__/execute/139
-execute if entity @s[tag=tnt.pokemon_pikachu] run function mtnt.main:__generated__/execute/143
-execute if entity @s[tag=tnt.pokemon_pokeball] run function mtnt.main:__generated__/execute/147
-execute if entity @s[tag=tnt.rainbow_red] run function mtnt.main:__generated__/execute/151
-execute if entity @s[tag=tnt.rainbow_cyan] run function mtnt.main:__generated__/execute/155
+summon armor_stand ~ ~ ~ {NoGravity:1b,Invisible:1b,Tags:["tnt.pokemon_pikachu","tnt.as"],ArmorItems:[{},{},{},{id:"minecraft:endermite_spawn_egg",Count:1b,tag:{CustomModelData:110018}}]}
+setblock ~ ~ ~ tnt
+tp @s ~ ~-600 ~

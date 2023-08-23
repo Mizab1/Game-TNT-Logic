@@ -124,36 +124,6 @@ loot_table mystery_tnt{
             },
             {
               "type": "minecraft:item",
-              "name": "minecraft:golden_apple",
-              "functions": [
-                {
-                  "function": "minecraft:set_count",
-                  "count": 1
-                },
-                {
-                  "function": "minecraft:set_name",
-                  "entity": "this",
-                  "name": {
-                    "text" : "Mushroom",
-                    "italic": false
-                  }
-                },
-                {
-                  "function": "minecraft:set_lore",
-                  "entity": "this",
-                  "lore": [
-                    {
-                      "text": "Right Click to use it",
-                      "color": "minecraft:dark_purple",
-                      "italic": false
-                    }
-                  ],
-                  "replace": false
-                }
-              ]
-            },
-            {
-              "type": "minecraft:item",
               "name": "minecraft:potion",
               "functions": [
                 {

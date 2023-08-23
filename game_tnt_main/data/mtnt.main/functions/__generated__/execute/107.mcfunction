@@ -3,10 +3,7 @@
 kill @e[type=tnt, distance=..0.5]
 particle minecraft:explosion ~ ~ ~ 2 2 2 1 100
 playsound entity.generic.explode master @a ~ ~ ~
-execute positioned ~-0.511 ~ ~2.702 run function models_logic:summon/mutant_creeper
-execute positioned ~2.833 ~ ~-4.363 run function models_logic:summon/mutant_creeper
-execute positioned ~3.589 ~ ~4.958 run function models_logic:summon/mutant_creeper
-execute positioned ~-4.411 ~ ~-0.494 run function models_logic:summon/mutant_creeper
-execute positioned ~-4.528 ~ ~0.120 run function models_logic:summon/mutant_creeper
-playsound minecraft:entity.creeper.hurt master @a ~ ~ ~ 1 0.7
+summon husk ~ ~ ~ {Motion:[0.7,0.9,0.6],DeathLootTable:"minecraft:bat", Silent:1b,Health:20f,Tags:["new","aj_mob","roblox_noob"],ActiveEffects:[{Id:14,Amplifier:1b,Duration:999999,ShowParticles:0b}],Attributes:[{Name:generic.max_health,Base:20}, {Name:generic.attack_damage,Base:50}]}
+summon husk ~ ~ ~ {Motion:[0.6,0.2,0.4],DeathLootTable:"minecraft:bat", Silent:1b,Health:20f,Tags:["new","aj_mob","roblox_noob"],ActiveEffects:[{Id:14,Amplifier:1b,Duration:999999,ShowParticles:0b}],Attributes:[{Name:generic.max_health,Base:20}, {Name:generic.attack_damage,Base:50}]}
+summon husk ~ ~ ~ {Motion:[0.3,0.5,0.1],DeathLootTable:"minecraft:bat", Silent:1b,Health:20f,Tags:["new","aj_mob","roblox_noob"],ActiveEffects:[{Id:14,Amplifier:1b,Duration:999999,ShowParticles:0b}],Attributes:[{Name:generic.max_health,Base:20}, {Name:generic.attack_damage,Base:50}]}
 kill @s

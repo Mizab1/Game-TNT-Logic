@@ -6,6 +6,9 @@ scoreboard objectives add rng_score dummy
 scoreboard objectives add private dummy
 scoreboard objectives add hurt_time_llama dummy
 scoreboard objectives add llama_health dummy
+scoreboard objectives add missile_timer dummy
+scoreboard objectives add drank_potion minecraft.used:minecraft.potion
+scoreboard objectives add ate_mushroom minecraft.used:minecraft.enchanted_golden_apple
 scoreboard objectives add rc_clicked minecraft.used:minecraft.carrot_on_a_stick
 scoreboard objectives add pos_x1 dummy
 scoreboard objectives add pos_y1 dummy

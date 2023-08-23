@@ -10,6 +10,9 @@ function load{
     scoreboard objectives add private dummy
     scoreboard objectives add hurt_time_llama dummy
     scoreboard objectives add llama_health dummy
+    scoreboard objectives add missile_timer dummy
+    scoreboard objectives add drank_potion minecraft.used:minecraft.potion
+    scoreboard objectives add ate_mushroom minecraft.used:minecraft.enchanted_golden_apple
 
     scoreboard objectives add rc_clicked minecraft.used:minecraft.carrot_on_a_stick
 
@@ -27,10 +30,31 @@ function load{
     gamerule doWeatherCycle false
     gamerule doDaylightCycle false
 }
+clock 80t{
+    # Bowser Sounds
+    execute at @e[type=#models_logic:aj_mobs,tag=bowser,tag=aj_mob] run{
+        playsound minecraft:sfx.bowser master @a ~ ~ ~
+    }
+}
 clock 30t{
     # storm TNT
     execute at @e[type=item_display, tag=storm] as @a[distance=15..] run{
         effect give @s[distance=10..] instant_damage 1 0 true
+    }
+}
+clock 20t{
+    # Missile timer
+    execute as @e[type=armor_stand,tag=missile] at @s run{
+        execute if score @s missile_timer matches 12.. run{
+            summon creeper ~ ~ ~ {ExplosionRadius:-1b,Fuse:1,ignited:1b,Tags:["lasercreeper"],ActiveEffects:[{Id:14b,Amplifier:1b,Duration:4000,ShowParticles:0b}]}
+            kill @s
+            schedule 2t append{
+                kill @e[type=area_effect_cloud]
+            }
+        }
+        execute unless score @s missile_timer matches 12.. run{
+            scoreboard players add @s missile_timer 1 
+        }
     }
 }
 clock 10t {
@@ -94,18 +118,7 @@ function tick{
 
     #pokeball
     execute as @e[type=snowball] at @s run{  
-        # Store
-        execute if data entity @s Item.tag.pokeball if entity @e[type=#aestd1:mobs, tag=!aj_mob, distance=..3] run{
-            execute as @e[type=#aestd1:mobs, tag=!aj_mob, distance=..3, limit=1] at @s run{
-                tp @s 208 242 -85
-                data merge entity @s {PersistenceRequired:1b}
-                tag @s add catched
-            }
-            particle poof ~ ~ ~ 1 1 1 0.5 1000
-            playsound minecraft:block.lava.extinguish master @a ~ ~ ~ 1 1.8
-            summon item ~ ~ ~ {Item:{id:"minecraft:snowball",Count:1b,tag:{display:{Name:'{"text":"Catched Pokemon","color":"gold","italic":false}'},loaded_pokeball:1b,Enchantments:[{}]}}}
-            kill @s
-        }
+        
 
         # Load
         <%%
@@ -131,6 +144,7 @@ function tick{
     execute as @e[type=#animated_java:root,tag=aj.fnaf_bonnie.root] at @s if entity @a[distance=..2] run{
         execute as @a[distance=..2] at @s run{
             playsound minecraft:sfx.fnaf_scream master @s
+            particle minecraft:elder_guardian ~ ~ ~ 0 0 0 0 1
             effect give @s poison 4 0 true
             effect give @s blindness 4 0 true
         }
@@ -140,6 +154,7 @@ function tick{
     execute as @e[type=#animated_java:root,tag=aj.fnaf_freddy.root] at @s if entity @a[distance=..2] run{
         execute as @a[distance=..2] at @s run{
             playsound minecraft:sfx.fnaf_scream master @s
+            particle minecraft:elder_guardian ~ ~ ~ 0 0 0 0 1
             effect give @s poison 4 0 true
             effect give @s blindness 4 0 true
         }
@@ -151,6 +166,23 @@ function tick{
     execute at @e[type=fireball] run{
         particle flame ~ ~ ~ 0.3 0.3 0.3 0 10
     }
+
+    # kill porkchop
+    kill @e[type=item, nbt={Item:{id:"minecraft:porkchop"}}]
+
+    # Mushroom and star sound
+    execute as @a at @s if score @s drank_potion matches 1.. run{
+        scoreboard players set @s drank_potion 0
+
+        stopsound @s master minecraft:sfx.star
+        playsound minecraft:sfx.star master @s
+    } 
+    execute as @a at @s if score @s ate_mushroom matches 1.. run{
+        scoreboard players set @s ate_mushroom 0
+
+        stopsound @s master minecraft:sfx.mushroom
+        playsound minecraft:sfx.mushroom master @s
+    } 
 
 
     # setblock the custom TNT
@@ -296,19 +328,21 @@ function tick{
                 }
                 # Kill the AS if TNT is exploded
                 execute if score @s fuse_time matches 1 run{
-                    summon item_display ~ ~0.5 ~ {Tags:["emergency_meeting_anchor"],item:{id:"minecraft:wooden_hoe",Count:1b,tag:{CustomModelData:111002}}}
+                    execute as @a at @s run playsound minecraft:sfx.meeting master @a
                     title @a times 20 60 20
                     title @a title {"text":"\uEff1"}
+
                     kill @e[type=tnt, distance=..0.5]
-                    execute as @a at @s run playsound minecraft:sfx.meeting master @a
+                    
                     schedule 3s replace{
-                        execute as @e[type=item_display, tag=emergency_meeting_anchor] at @s run{
+                        spreadplayers 193 -61 2 5 true @e[type=#aestd1:living_base, tag=!aj_mob, tag=!tp_ignore]
+                        summon marker 193 256 -61 {Tags:["emergency_meeting_anchor"]}
+                        execute as @e[type=marker, tag=emergency_meeting_anchor] at @s run{
                             execute positioned ~2 ~ ~3 run function models_logic:summon/aqua
                             execute positioned ~-2 ~ ~-4 run function models_logic:summon/purple
                             execute positioned ~ ~ ~3 run function models_logic:summon/yellow
 
-                            spreadplayers ~ ~ 3 8 true @e[type=#aestd1:living_base, tag=!aj_mob, tag=!tp_ignore]
-                            execute as @a at @s run tp @s ~ ~ ~ facing entity @e[type=item_display, tag=emergency_meeting_anchor,sort=nearest, limit=1]
+                            execute as @a at @s run tp @s ~ ~ ~ facing entity @e[type=marker, tag=emergency_meeting_anchor,sort=nearest, limit=1]
                         }
                     }
                     # kill @e[type=armor_stand,tag=tnt.amongus_emergency,distance=..4]
@@ -975,18 +1009,23 @@ function tick{
                     particle minecraft:explosion ~ ~ ~ 2 2 2 1 100
                     playsound entity.generic.explode master @a ~ ~ ~
 
-                    setblock ~ ~-1 ~ structure_block[mode=load]{name:"minecraft:backrooms",posX:-2,posY:-128,posZ:-2,rotation:"NONE",mirror:"NONE",mode:"LOAD"} replace
-                    setblock ~ ~-2 ~ redstone_block
-                    tp @a ~ ~-48 ~
-                    setblock ~ ~-1 ~ air replace
-                    
-                    execute as @a at @s run{
-                        playsound minecraft:ambient.cave master @s ~ ~ ~ 1 1.5
-                        particle poof ~ ~1 ~ 2 2 2 0.5 1000
-                        effect give @s nausea 8 100 true
-                    }
-                    schedule 2s replace{
-                        execute at @a run playsound minecraft:entity.ender_dragon.growl master @a ~ ~ ~ 1 0.1
+                    block{
+                        name setup_backrooms_maze
+
+                        tp @a 748 171 -88
+
+                        execute positioned 776 171 -82 run function models_logic:summon/backdoor
+                        execute positioned 763 171 -54 run function models_logic:summon/backdoor
+                        execute positioned 755 171 -48 run function models_logic:summon/backdoor
+
+                        execute as @a at @s run{
+                            playsound minecraft:ambient.cave master @s ~ ~ ~ 1 1.5
+                            particle poof ~ ~1 ~ 2 2 2 0.5 1000
+                            effect give @s nausea 8 100 true
+                        }
+                        schedule 2s replace{
+                            execute at @a run playsound minecraft:entity.ender_dragon.growl master @a ~ ~ ~ 1 0.1
+                        }
                     }
                     # kill @e[type=armor_stand,tag=tnt.backrooms_maze,distance=..4]
                     kill @s
@@ -1016,10 +1055,21 @@ function tick{
                     particle minecraft:explosion ~ ~ ~ 2 2 2 1 100
                     playsound entity.generic.explode master @a ~ ~ ~
 
-                    function models_logic:summon/backdoor
+                    <%%
+                        function randomNumber(min, max) {
+                            return (Math.random() * (max - min) + min).toFixed(3);
+                        }
+                        for (let i = 0; i < 2; i++) {
+                            emit(`execute positioned ~${randomNumber(-8, 8)} ~ ~${randomNumber(-8, 8)} run function models_logic:summon/backdoor`)
+                            emit(`execute positioned ~${randomNumber(-8, 8)} ~ ~${randomNumber(-8, 8)} run function models_logic:summon/backdoor_hound`)
+                            emit(`execute positioned ~${randomNumber(-8, 8)} ~ ~${randomNumber(-8, 8)} run function models_logic:summon/backdoor_watcher`)
+                            emit(`execute positioned ~${randomNumber(-8, 8)} ~ ~${randomNumber(-8, 8)} run function models_logic:summon/backdoor_worm`)
+                        }
+                    %%>
+                    
                     particle poof ~ ~1 ~ 2 2 2 0.5 1000
 
-                    tellraw @a {"text":"What's that Mob?!", "color":"red"}
+                    tellraw @a {"text":"What are those Mobs?!", "color":"red"}
 
                     playsound minecraft:entity.enderman.scream master @a ~ ~ ~ 1 0.1
                     
@@ -1095,8 +1145,26 @@ function tick{
                     playsound entity.generic.explode master @a ~ ~ ~
 
                     particle minecraft:totem_of_undying ~ ~1 ~ 0.5 0.5 0.5 0.1 50
-                    summon item ~ ~ ~ {Motion:[0.1, 0.3, 0.2], Item:{id:"minecraft:snowball",Count:16b,tag:{display:{Name:'{"text":"Pokeball","color":"gold","italic":false}'},pokeball:1b}}}
+
+
+                    execute as @e[type=#aestd1:mobs, tag=!aj_mob, distance=..15] at @s run{
+                        tp @s 208 242 -85
+                        data merge entity @s {PersistenceRequired:1b}
+                        tag @s add catched
+                        particle poof ~ ~ ~ 1 1 1 0.5 100
+                        playsound minecraft:block.lava.extinguish master @a ~ ~ ~ 1 1.8
+                        summon item ~ ~ ~ {Item:{id:"minecraft:snowball",Count:1b,tag:{display:{Name:'{"text":"Catched Pokemon","color":"gold","italic":false}'},loaded_pokeball:1b,Enchantments:[{}]}}}
+                    }
                     
+                    <%%
+                        function randomNumber(min, max) {
+                            return (Math.random() * (max - min) + min).toFixed(2);
+                        }
+
+                        for(let i = 0; i < 20; i++){
+                            emit(`summon snowball ~ ~ ~ {Motion:[${randomNumber(-0.8, 0.8)},${randomNumber(0.2, 0.6)},${randomNumber(-0.8, 0.8)}]}`)
+                        }
+                    %%>
                     
                     # kill @e[type=armor_stand,tag=tnt.pokemon_pokeball,distance=..4]
                     kill @s
@@ -1349,7 +1417,7 @@ function death_anim{
     }
 }
 
-# Bowser Shhot Logic
+# Bowser Shoot Logic
 function bowser_shooting{
     # cannon firing
     execute as @e[type=#models_logic:aj_mobs,tag=bowser,tag=aj_mob] at @s anchored eyes positioned ^ ^ ^1 if entity @a[distance=..9] run{
@@ -1387,4 +1455,14 @@ function tp_to_base{
 function tp_to_ship{
     spawnpoint @a 209 255 -112
     tp @p 209 255 -112
+}
+
+# Exit Maze
+function exit_backrooms_maze{
+    title @a title {"text": "Congratulations!", "color": "gold"}
+    title @a subtitle {"text": "You have completed the maze!", "color": "gold"}
+    kill @e[type=husk, tag=backdoor] 
+    spawnpoint @a 209 255 -112
+    tp @p 209 255 -112
+    playsound minecraft:ui.toast.challenge_complete master @a 209 255 -112
 }

@@ -3,7 +3,15 @@
 kill @e[type=tnt, distance=..0.5]
 particle minecraft:explosion ~ ~ ~ 2 2 2 1 100
 playsound entity.generic.explode master @a ~ ~ ~
-summon husk ~ ~ ~ {Motion:[1.0,0.2,0.2],DeathLootTable:"minecraft:bat", Silent:1b,Health:20f,Tags:["new","aj_mob","roblox_noob"],ActiveEffects:[{Id:14,Amplifier:1b,Duration:999999,ShowParticles:0b}],Attributes:[{Name:generic.max_health,Base:20}, {Name:generic.attack_damage,Base:50}]}
-summon husk ~ ~ ~ {Motion:[0.7,0.3,0.5],DeathLootTable:"minecraft:bat", Silent:1b,Health:20f,Tags:["new","aj_mob","roblox_noob"],ActiveEffects:[{Id:14,Amplifier:1b,Duration:999999,ShowParticles:0b}],Attributes:[{Name:generic.max_health,Base:20}, {Name:generic.attack_damage,Base:50}]}
-summon husk ~ ~ ~ {Motion:[0.8,0.0,0.1],DeathLootTable:"minecraft:bat", Silent:1b,Health:20f,Tags:["new","aj_mob","roblox_noob"],ActiveEffects:[{Id:14,Amplifier:1b,Duration:999999,ShowParticles:0b}],Attributes:[{Name:generic.max_health,Base:20}, {Name:generic.attack_damage,Base:50}]}
+summon fox ~ ~ ~ {Motion:[0.8,0.7,0.9], Tags:["roblox_fox"]}
+summon cow ~ ~ ~ {Motion:[0.8,0.2,0.5], Tags:["roblox_cow"], CustomName:'{"text":"Cow"}'}
+function models_logic:summon/elephant
+function models_logic:summon/penguin
+function models_logic:summon/deer
+summon fox ~ ~ ~ {Motion:[0.9,0.3,0.5], Tags:["roblox_fox"]}
+summon cow ~ ~ ~ {Motion:[0.2,0.2,0.3], Tags:["roblox_cow"], CustomName:'{"text":"Cow"}'}
+function models_logic:summon/elephant
+function models_logic:summon/penguin
+function models_logic:summon/deer
+execute positioned ~-25 ~-1 ~-25 run fill ~ ~ ~ ~50 ~ ~50 yellow_concrete replace #mtnt.main:all_but_air
 kill @s
